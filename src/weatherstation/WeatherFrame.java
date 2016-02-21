@@ -5,6 +5,11 @@
  */
 package weatherstation;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author 1960681
@@ -27,6 +32,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileChooser = new javax.swing.JFileChooser();
         TimePanel = new javax.swing.JPanel();
         TempTimeLabel = new javax.swing.JLabel();
         PlotPanel = new javax.swing.JPanel();
@@ -42,8 +48,11 @@ public class WeatherFrame extends javax.swing.JFrame {
         GuagesPanel = new javax.swing.JPanel();
         TempGuagelabel = new javax.swing.JLabel();
         MenuBar = new javax.swing.JMenuBar();
-        FIleMenu = new javax.swing.JMenu();
+        FileMenu = new javax.swing.JMenu();
         OpenMenuItem = new javax.swing.JMenuItem();
+
+        fileChooser.setFileFilter(new xmlFilter());
+        fileChooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Weather Station");
@@ -150,7 +159,12 @@ public class WeatherFrame extends javax.swing.JFrame {
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        FIleMenu.setText("File");
+        FileMenu.setText("File");
+        FileMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FileMenuActionPerformed(evt);
+            }
+        });
 
         OpenMenuItem.setText("Open");
         OpenMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -158,9 +172,9 @@ public class WeatherFrame extends javax.swing.JFrame {
                 OpenMenuItemActionPerformed(evt);
             }
         });
-        FIleMenu.add(OpenMenuItem);
+        FileMenu.add(OpenMenuItem);
 
-        MenuBar.add(FIleMenu);
+        MenuBar.add(FileMenu);
 
         setJMenuBar(MenuBar);
 
@@ -198,7 +212,13 @@ public class WeatherFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OpenMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenMenuItemActionPerformed
-        // TODO add your handling code here:
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+        } 
+        else {
+            System.out.println("File access cancelled by user.");
+        }
     }//GEN-LAST:event_OpenMenuItemActionPerformed
 
     private void TemperatureBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TemperatureBtnActionPerformed
@@ -212,6 +232,10 @@ public class WeatherFrame extends javax.swing.JFrame {
     private void HeatIndexBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeatIndexBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_HeatIndexBtnActionPerformed
+
+    private void FileMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FileMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,7 +275,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BarometricPressureBtn;
     private javax.swing.JPanel ButtonPanel;
-    private javax.swing.JMenu FIleMenu;
+    private javax.swing.JMenu FileMenu;
     private javax.swing.JPanel GuagesPanel;
     private javax.swing.JToggleButton HeatIndexBtn;
     private javax.swing.JToggleButton HumidityBtn;
@@ -266,5 +290,6 @@ public class WeatherFrame extends javax.swing.JFrame {
     private javax.swing.JToggleButton UVIndexBtn;
     private javax.swing.JToggleButton WindChillBtn;
     private javax.swing.JToggleButton WindSpeedBtn;
+    private javax.swing.JFileChooser fileChooser;
     // End of variables declaration//GEN-END:variables
 }

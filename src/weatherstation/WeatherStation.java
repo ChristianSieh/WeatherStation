@@ -15,7 +15,9 @@ public class WeatherStation {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        WeatherFrame wFrame = new WeatherFrame();
+        wFrame.setVisible(true);
+        //ChartPanel test = new ChartPanel();
     }
     
 }
