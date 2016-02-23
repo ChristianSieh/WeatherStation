@@ -5,12 +5,21 @@
  */
 package weatherstation;
 
+import static java.awt.Color.white;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.*;
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -30,6 +39,8 @@ public class WeatherFrame extends javax.swing.JFrame {
         fileChooser = new JFileChooser();
         TimePanel = new JPanel();
         dayComboBox = new JComboBox<String>();
+        plotChart = createChart();
+        collection = new XYSeriesCollection();
         plotPanel = new ChartPanel(plotChart);
         ButtonPanel = new JPanel();
         TemperatureBtn = new JToggleButton();
@@ -93,8 +104,8 @@ public class WeatherFrame extends javax.swing.JFrame {
         TemperatureBtn.setToolTipText("Temperature");
         TemperatureBtn.setFocusPainted(false);
         TemperatureBtn.setPreferredSize(new Dimension(66, 66));
-        TemperatureBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        TemperatureBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 TemperatureBtnActionPerformed(evt);
             }
         });
@@ -291,10 +302,14 @@ public class WeatherFrame extends javax.swing.JFrame {
         }
     }
 
-    private void TemperatureBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void TemperatureBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("Temperature", list);
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("Temperature");
     }
-
     private void HumidityBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -306,7 +321,61 @@ public class WeatherFrame extends javax.swing.JFrame {
     private void FileMenuActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
+    
+    private void addSeries(String label, ArrayList<Number> list)
+    {
+        /*XYSeries series = new XYSeries(label);
+        for(int i = 0; i < list.size(); i++)
+        {
+            series.add(list.get(i), i);
+        }*/
+        
+        XYSeries series = new XYSeries(label);
+        series.add(1.0, 5.0);
+        series.add(2.0, 7.0);
+        series.add(3.0, 6.0);
+        series.add(4.0, 8.0);
+        series.add(5.0, 4.0);
+        series.add(6.0, 4.0);
+        series.add(7.0, 2.0);
+        series.add(8.0, 1.0);
+        
+        collection.addSeries(series);
+        updateDataset();
+    }
+    
+    private void removeSeries(String label)
+    {
+        XYSeries series = new XYSeries(label);
+        
+        collection.removeSeries(series);
+        updateDataset();
+    }
+    
+    private void updateDataset()
+    {
+        dataset = collection;
+        updateChart();
+    }
+    
+    private void updateChart()
+    {    
+        XYPlot plot = plotChart.getXYPlot();
+        plot.setDataset(dataset);
+        plotPanel.setChart(plotChart);
+        plotPanel.repaint();
+    }
 
+    private JFreeChart createChart()
+    {
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                null, null, null, null);
+                
+        chart.setBackgroundPaint(white);
+        
+        return chart;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -368,4 +437,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JComboBox<Integer> yearComboBox;
     private ChartPanel plotPanel;
     private JFreeChart plotChart;
+    private ArrayList list;
+    private XYDataset dataset;
+    private XYSeriesCollection collection;
 }
