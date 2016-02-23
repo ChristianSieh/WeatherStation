@@ -7,10 +7,6 @@ package weatherstation;
 
 import java.io.File;
 
-/**
- *
- * @author 1960681
- */
 public class xmlFilter extends javax.swing.filechooser.FileFilter {
     @Override
     public boolean accept(File file) {
