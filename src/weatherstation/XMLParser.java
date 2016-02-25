@@ -54,6 +54,9 @@ public class XMLParser {
                         {
                             Element weather = weatherList.get(j);
                             WeatherData data = new WeatherData(weather);
+                            data.year = yearNum;
+                            data.month = monthIndex;
+                            data.day = dayIndex;
                             tempDay.data.add(data);
                         }
 

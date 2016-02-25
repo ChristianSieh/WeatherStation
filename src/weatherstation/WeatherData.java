@@ -25,15 +25,34 @@ public class WeatherData {
     public String heatIndex;
     public String uvIndex;
     public String rainfall;
+    public int year;
+    public int month;
+    public int day;
+    public int hour;
+    public int minute;
     
     WeatherData(Element xmlData)
     {
         Element child = xmlData.getChild("date");
         if(child != null)
+        {
             date = child.getValue();
+        }
         child = xmlData.getChild("time");
         if(child != null)
+        {
             time = child.getValue();
+            String[] temp = time.split(":");
+            for(int i = 0; i < temp.length; i++)
+            {
+                temp[i] = temp[i].trim();
+            }
+            hour = Integer.parseInt(temp[0]);
+            String meridiem = temp[1].substring(temp[1].length() - 1);
+            minute = Integer.parseInt(temp[1].substring(0, temp[1].length() - 1));
+            if(meridiem.equalsIgnoreCase("P"))
+                hour += 12;
+        }
         child = xmlData.getChild("temperature");
         if(child != null)
             temperature = child.getValue();
