@@ -60,11 +60,26 @@ public class WeatherFrame extends javax.swing.JFrame {
         DisplayLabel = new JLabel();
         DayLabel = new JLabel();
         displayComboBox = new JComboBox<Integer>();
-        monthComboBox = new JComboBox<Integer>();
+        monthComboBox = new JComboBox<String>();
         MenuBar = new JMenuBar();
         FileMenu = new JMenu();
         OpenMenuItem = new JMenuItem();
         yearsList = new ArrayList<WeatherYear>();
+        monthList = new ArrayList<String>() {{
+             add("January");
+             add("February");
+             add("March");
+             add("April");
+             add("May");
+             add("June");
+             add("July");
+             add("Augest");
+             add("September");
+             add("October");
+             add("November");
+             add("December");
+        }};
+        filled = false;
 
         //fileChooser.setFileFilter(new xmlFilter());
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -181,8 +196,29 @@ public class WeatherFrame extends javax.swing.JFrame {
         {"Year", "Month", "Week", "Day"}));
 
         yearComboBox.setModel(new DefaultComboBoxModel<>());
+        yearComboBox.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(java.awt.event.ItemEvent event){
+                if(filled == true) {
+                    dayComboBox.removeAllItems();
+                    fillDayComboBox(yearsList.get(yearComboBox.getSelectedIndex())
+                        .months.get(monthComboBox.getSelectedIndex()));
+                }
+                
+            }
+        });
         
         monthComboBox.setModel(new DefaultComboBoxModel());
+        monthComboBox.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(java.awt.event.ItemEvent event){
+                System.out.println(event.getItem() + " " + monthComboBox.getSelectedIndex());
+                dayComboBox.removeAllItems();
+                fillDayComboBox(yearsList.get(yearComboBox.getSelectedIndex())
+                        .months.get(monthComboBox.getSelectedIndex()));
+                
+            }
+        });
 
         dayComboBox.setModel(new javax.swing.DefaultComboBoxModel());
         
@@ -279,15 +315,18 @@ public class WeatherFrame extends javax.swing.JFrame {
 
         pack();
     }
+    
 
     private void OpenMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            filled = false;
             xmlParser.parse(fileChooser.getSelectedFile(), yearsList);
             fillYearComboBox();
-            fillMonthComboBox(yearsList.get(yearComboBox.getSelectedIndex()));
+            fillMonthComboBox();
             fillDayComboBox(yearsList.get(yearComboBox.getSelectedIndex()).
                     months.get(monthComboBox.getSelectedIndex()));
+            filled = true;
         } 
         else {
             System.out.println("File access cancelled by user.");
@@ -371,11 +410,11 @@ public class WeatherFrame extends javax.swing.JFrame {
         }
     }
     
-    private void fillMonthComboBox(WeatherYear year) {
+    private void fillMonthComboBox() {
         
-        for (int i = 0; i < year.months.size(); i++)
+        for (int i = 0; i < monthList.size(); i++)
         {
-            monthComboBox.addItem(year.months.get(i).month + 1);
+            monthComboBox.addItem(monthList.get(i));
         }
     }
     
@@ -386,7 +425,6 @@ public class WeatherFrame extends javax.swing.JFrame {
         }
     }
     
-    /////////////////////////////////////////////////////////
     
     /**
      * @param args the command line arguments
@@ -444,7 +482,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JLabel DisplayLabel;
     private JLabel DayLabel;
     private JComboBox<Integer> dayComboBox;
-    private JComboBox<Integer> monthComboBox;
+    private JComboBox<String> monthComboBox;
     private JComboBox<Integer> displayComboBox;
     private JComboBox<Integer> yearComboBox;
     private ChartPanel plotPanel;
@@ -454,4 +492,6 @@ public class WeatherFrame extends javax.swing.JFrame {
     private XYSeriesCollection collection;
     private XMLParser xmlParser;
     private ArrayList<WeatherYear> yearsList;
+    private ArrayList<String> monthList;
+    private boolean filled;
 }
