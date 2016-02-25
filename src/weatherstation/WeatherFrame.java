@@ -37,6 +37,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         fileChooser = new JFileChooser();
+        xmlParser = new XMLParser();
         TimePanel = new JPanel();
         dayComboBox = new JComboBox<String>();
         plotChart = createChart();
@@ -63,8 +64,9 @@ public class WeatherFrame extends javax.swing.JFrame {
         MenuBar = new JMenuBar();
         FileMenu = new JMenu();
         OpenMenuItem = new JMenuItem();
+        yearsList = new ArrayList<WeatherYear>();
 
-        fileChooser.setFileFilter(new xmlFilter());
+        //fileChooser.setFileFilter(new xmlFilter());
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -295,7 +297,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     private void OpenMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
+            xmlParser.parse(fileChooser.getSelectedFile(), yearsList);
         } 
         else {
             System.out.println("File access cancelled by user.");
@@ -319,7 +321,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     }
 
     private void FileMenuActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+
     }
     
     private void addSeries(String label, ArrayList<Number> list)
@@ -440,4 +442,6 @@ public class WeatherFrame extends javax.swing.JFrame {
     private ArrayList list;
     private XYDataset dataset;
     private XYSeriesCollection collection;
+    private XMLParser xmlParser;
+    private ArrayList<WeatherYear> yearsList;
 }
