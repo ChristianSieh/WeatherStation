@@ -57,9 +57,9 @@ public class WeatherFrame extends javax.swing.JFrame {
         yearComboBox = new JComboBox<Integer>();
         YearLabel = new JLabel();
         MonthLabel = new JLabel();
-        WeekLabel = new JLabel();
+        DisplayLabel = new JLabel();
         DayLabel = new JLabel();
-        weekComboBox = new JComboBox<Integer>();
+        displayComboBox = new JComboBox<Integer>();
         monthComboBox = new JComboBox<Integer>();
         MenuBar = new JMenuBar();
         FileMenu = new JMenu();
@@ -71,31 +71,6 @@ public class WeatherFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Weather Station");
-
-        dayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] 
-            { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        DayLabel.setText("Day");
-
-        GroupLayout TimePanelLayout = new GroupLayout(TimePanel);
-        TimePanel.setLayout(TimePanelLayout);
-        TimePanelLayout.setHorizontalGroup(
-            TimePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(TimePanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(DayLabel)
-                .addGap(18, 18, 18)
-                .addComponent(dayComboBox, GroupLayout.PREFERRED_SIZE, 
-                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        TimePanelLayout.setVerticalGroup(
-            TimePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(TimePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(dayComboBox, GroupLayout.PREFERRED_SIZE, 
-                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addComponent(DayLabel))
-        );
 
         plotPanel.setBackground(new java.awt.Color(254, 254, 254));
         plotPanel.setPreferredSize(new java.awt.Dimension(10, 0));
@@ -192,22 +167,25 @@ public class WeatherFrame extends javax.swing.JFrame {
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
-        yearComboBox.setModel(new DefaultComboBoxModel<>(new Integer[] { 1, 2, 3, 4 }));
+
 
         YearLabel.setText("Year");
 
         MonthLabel.setText("Month");
 
-        WeekLabel.setText("Week");
+        DayLabel.setText("Day");
+        
+        DisplayLabel.setText("Display");
 
-        weekComboBox.setModel(new DefaultComboBoxModel(
-                new String[] { "Week 1", "Week 2", "Week 3", "Week 4" }));
+        displayComboBox.setModel(new DefaultComboBoxModel(new String[]
+        {"Year", "Month", "Week", "Day"}));
 
-        monthComboBox.setModel(new DefaultComboBoxModel(
-                new String[] { "January", "February", "March", "April", "May",
-                    "June", "July", "Augest", "September", "October",
-                    "November", "December" }));
+        yearComboBox.setModel(new DefaultComboBoxModel<>());
+        
+        monthComboBox.setModel(new DefaultComboBoxModel());
 
+        dayComboBox.setModel(new javax.swing.DefaultComboBoxModel());
+        
         FileMenu.setText("File");
         FileMenu.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +204,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         MenuBar.add(FileMenu);
 
         setJMenuBar(MenuBar);
-
+        
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,9 +225,14 @@ public class WeatherFrame extends javax.swing.JFrame {
                         .addComponent(monthComboBox, GroupLayout.PREFERRED_SIZE,
                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(WeekLabel)
+                        .addComponent(DayLabel)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dayComboBox, GroupLayout.PREFERRED_SIZE, 
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(DisplayLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(weekComboBox, GroupLayout.PREFERRED_SIZE,
+                        .addComponent(displayComboBox, GroupLayout.PREFERRED_SIZE,
                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TimePanel, GroupLayout.DEFAULT_SIZE,
@@ -275,11 +258,14 @@ public class WeatherFrame extends javax.swing.JFrame {
                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(YearLabel)
                         .addComponent(MonthLabel)
-                        .addComponent(WeekLabel)
-                        .addComponent(weekComboBox, GroupLayout.PREFERRED_SIZE,
-                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DayLabel)
+                        .addComponent(DisplayLabel)
                         .addComponent(monthComboBox, GroupLayout.PREFERRED_SIZE,
-                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dayComboBox, GroupLayout.PREFERRED_SIZE,
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(displayComboBox, GroupLayout.PREFERRED_SIZE,
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButtonPanel, GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
@@ -298,6 +284,10 @@ public class WeatherFrame extends javax.swing.JFrame {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             xmlParser.parse(fileChooser.getSelectedFile(), yearsList);
+            fillYearComboBox();
+            fillMonthComboBox(yearsList.get(yearComboBox.getSelectedIndex()));
+            fillDayComboBox(yearsList.get(yearComboBox.getSelectedIndex()).
+                    months.get(monthComboBox.getSelectedIndex()));
         } 
         else {
             System.out.println("File access cancelled by user.");
@@ -324,14 +314,8 @@ public class WeatherFrame extends javax.swing.JFrame {
 
     }
     
-    private void addSeries(String label, ArrayList<Number> list)
-    {
-        /*XYSeries series = new XYSeries(label);
-        for(int i = 0; i < list.size(); i++)
-        {
-            series.add(list.get(i), i);
-        }*/
-        
+    private void addSeries(String label, ArrayList<WeatherYear> list)
+    {   
         XYSeries series = new XYSeries(label);
         series.add(1.0, 5.0);
         series.add(2.0, 7.0);
@@ -387,48 +371,19 @@ public class WeatherFrame extends javax.swing.JFrame {
         }
     }
     
-    private void fillMonthComboBox(int yearIndex) {
+    private void fillMonthComboBox(WeatherYear year) {
         
-        for (int i = 0; i < yearsList.get(yearIndex).months.size(); i++)
+        for (int i = 0; i < year.months.size(); i++)
         {
-            monthComboBox.addItem(yearsList.get(yearIndex).months.get(i).month);
+            monthComboBox.addItem(year.months.get(i).month + 1);
         }
     }
     
-    private void fillDayComboBox(WeatherMonth month) {
-        
-        for(int i = 1; i <= month.days.size(); i++)
+    private void fillDayComboBox(WeatherMonth month) {  
+        for(int i = 0; i < month.days.size(); i++)
         {
-            monthComboBox.addItem(i);
+            dayComboBox.addItem(i + 1);
         }
-        
-        /*if (monthIndex == 1 || monthIndex == 3 || monthIndex == 5 || monthIndex == 7
-                || monthIndex == 8 || monthIndex == 10 || monthIndex == 12) {
-            
-            for (int dayCount = 1; dayCount < 32; dayCount++) {
-                monthComboBox.addItem(dayCount); 
-            }
-        }
-        else if (monthIndex == 4 || monthIndex == 6 || monthIndex == 9 || 
-                monthIndex == 11) {
-            
-            for (int dayCount = 1; dayCount < 31; dayCount++) {
-                monthComboBox.addItem(dayCount); 
-            }
-        }
-        else if (monthIndex == 2 && monthIndex % 4 == 0) { ////////////////////////////
-            for (int dayCount = 1; dayCount < 30; dayCount++) {
-                monthComboBox.addItem(dayCount); 
-            }
-        }
-        
-        else { 
-            for (int dayCount = 1; dayCount < 29; dayCount++) {
-                monthComboBox.addItem(dayCount); 
-            }
-        }*/
-            
- 
     }
     
     /////////////////////////////////////////////////////////
@@ -486,11 +441,11 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JFileChooser fileChooser;
     private JLabel YearLabel;
     private JLabel MonthLabel;
-    private JLabel WeekLabel;
+    private JLabel DisplayLabel;
     private JLabel DayLabel;
     private JComboBox<Integer> dayComboBox;
     private JComboBox<Integer> monthComboBox;
-    private JComboBox<Integer> weekComboBox;
+    private JComboBox<Integer> displayComboBox;
     private JComboBox<Integer> yearComboBox;
     private ChartPanel plotPanel;
     private JFreeChart plotChart;
