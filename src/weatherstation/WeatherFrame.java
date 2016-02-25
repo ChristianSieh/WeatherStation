@@ -39,7 +39,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         fileChooser = new JFileChooser();
         xmlParser = new XMLParser();
         TimePanel = new JPanel();
-        dayComboBox = new JComboBox<String>();
+        dayComboBox = new JComboBox<Integer>();
         plotChart = createChart();
         collection = new XYSeriesCollection();
         plotPanel = new ChartPanel(plotChart);
@@ -59,8 +59,8 @@ public class WeatherFrame extends javax.swing.JFrame {
         MonthLabel = new JLabel();
         WeekLabel = new JLabel();
         DayLabel = new JLabel();
-        weekComboBox = new JComboBox<String>();
-        monthComboBox = new JComboBox<String>();
+        weekComboBox = new JComboBox<Integer>();
+        monthComboBox = new JComboBox<Integer>();
         MenuBar = new JMenuBar();
         FileMenu = new JMenu();
         OpenMenuItem = new JMenuItem();
@@ -378,6 +378,56 @@ public class WeatherFrame extends javax.swing.JFrame {
         return chart;
     }
     
+    ////////////////////////////////////////////////////////////
+    private void fillYearComboBox() {
+        
+        for (int i = 0; i < yearsList.size(); i++)
+        {
+            yearComboBox.addItem(yearsList.get(i).year);
+        }
+    }
+    
+    private void fillMonthComboBox(int yearIndex) {
+        
+        for (int i = 0; i < yearsList.get(yearIndex).months.size(); i++)
+        {
+            monthComboBox.addItem(yearsList.get(i).months.month);
+        }
+    }
+    
+    private void fillDayComboBox(int monthIndex) {
+        
+        if (monthIndex == 1 || monthIndex == 3 || monthIndex == 5 || monthIndex == 7
+                || monthIndex == 8 || monthIndex == 10 || monthIndex == 12) {
+            
+            for (int dayCount = 1; dayCount < 32; dayCount++) {
+                monthComboBox.addItem(dayCount); 
+            }
+        }
+        else if (monthIndex == 4 || monthIndex == 6 || monthIndex == 9 || 
+                monthIndex == 11) {
+            
+            for (int dayCount = 1; dayCount < 31; dayCount++) {
+                monthComboBox.addItem(dayCount); 
+            }
+        }
+        else if (monthIndex == 2 && monthIndex % 4 == 0) { ////////////////////////////
+            for (int dayCount = 1; dayCount < 30; dayCount++) {
+                monthComboBox.addItem(dayCount); 
+            }
+        }
+        
+        else { 
+            for (int dayCount = 1; dayCount < 29; dayCount++) {
+                monthComboBox.addItem(dayCount); 
+            }
+        }
+            
+ 
+    }
+    
+    /////////////////////////////////////////////////////////
+    
     /**
      * @param args the command line arguments
      */
@@ -428,14 +478,14 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JToggleButton UVIndexBtn;
     private JToggleButton WindChillBtn;
     private JToggleButton WindSpeedBtn;
-    private JComboBox<String> dayComboBox;
     private JFileChooser fileChooser;
     private JLabel YearLabel;
     private JLabel MonthLabel;
     private JLabel WeekLabel;
     private JLabel DayLabel;
-    private JComboBox<String> monthComboBox;
-    private JComboBox<String> weekComboBox;
+    private JComboBox<Integer> dayComboBox;
+    private JComboBox<Integer> monthComboBox;
+    private JComboBox<Integer> weekComboBox;
     private JComboBox<Integer> yearComboBox;
     private ChartPanel plotPanel;
     private JFreeChart plotChart;

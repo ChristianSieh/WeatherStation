@@ -58,7 +58,7 @@ public class XMLParser {
                         }
 
                         tempMonth.days.add(tempDay);
-                        tempYear.days.add(tempDay);
+                        tempYear.days.add(tempDay); 
                     }
                     
                     if(fileIndex < directory.listFiles().length)
