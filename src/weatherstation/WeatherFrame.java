@@ -391,13 +391,18 @@ public class WeatherFrame extends javax.swing.JFrame {
         
         for (int i = 0; i < yearsList.get(yearIndex).months.size(); i++)
         {
-            monthComboBox.addItem(yearsList.get(i).months.month);
+            monthComboBox.addItem(yearsList.get(yearIndex).months.get(i).month);
         }
     }
     
-    private void fillDayComboBox(int monthIndex) {
+    private void fillDayComboBox(WeatherMonth month) {
         
-        if (monthIndex == 1 || monthIndex == 3 || monthIndex == 5 || monthIndex == 7
+        for(int i = 1; i <= month.days.size(); i++)
+        {
+            monthComboBox.addItem(i);
+        }
+        
+        /*if (monthIndex == 1 || monthIndex == 3 || monthIndex == 5 || monthIndex == 7
                 || monthIndex == 8 || monthIndex == 10 || monthIndex == 12) {
             
             for (int dayCount = 1; dayCount < 32; dayCount++) {
@@ -421,7 +426,7 @@ public class WeatherFrame extends javax.swing.JFrame {
             for (int dayCount = 1; dayCount < 29; dayCount++) {
                 monthComboBox.addItem(dayCount); 
             }
-        }
+        }*/
             
  
     }
