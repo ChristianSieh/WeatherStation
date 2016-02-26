@@ -39,30 +39,46 @@ public class XMLParser {
 
                 for(int monthIndex = 0; monthIndex < 12; monthIndex++)
                 {
-                    WeatherMonth tempMonth = new WeatherMonth(monthIndex);
-
-                    Calendar cal = new GregorianCalendar(tempYear.year, tempMonth.month, 1);
+                    Calendar cal = new GregorianCalendar(tempYear.year, monthIndex, 1);
 
                     int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-                    for(int dayIndex = 0; dayIndex < daysInMonth; dayIndex++)
-                    {
-                        WeatherDay tempDay = new WeatherDay(dayIndex);
+                    WeatherMonth tempMonth = new WeatherMonth(monthIndex, daysInMonth);
+                    
+                    List<Element> weatherList = root.getChildren();
 
-                        List<Element> weatherList = root.getChildren();
-                        for ( int j = 0; j < 96; j++ )
+                    WeatherDay tempDay = new WeatherDay(0);
+                    int lastDayIndex = 0;
+                    
+                    for(int i = 0; i < weatherList.size(); i++)
+                    {
+                        Element weather = weatherList.get(i);
+                        WeatherData data = new WeatherData(weather);
+                        data.year = yearNum;
+                        data.month = monthIndex;
+                        data.day = Integer.parseInt(data.date.split("/")[1]);
+
+                        if(data.day == 30)
                         {
-                            Element weather = weatherList.get(j);
-                            WeatherData data = new WeatherData(weather);
-                            data.year = yearNum;
-                            data.month = monthIndex;
-                            data.day = dayIndex;
+                            int test = 0;
+                        }
+                        
+                        if(lastDayIndex != data.day - 1)
+                        {
+                            tempMonth.days.add(tempDay);
+                            tempYear.days.add(tempDay);
+                            tempDay = new WeatherDay(data.day);
+                            tempDay.data.add(data);
+                            lastDayIndex = data.day - 1;
+                        }
+                        else
+                        {
                             tempDay.data.add(data);
                         }
-
-                        tempMonth.days.add(tempDay);
-                        tempYear.days.add(tempDay); 
                     }
+                    
+                    tempMonth.days.add(tempDay);
+                    tempYear.days.add(tempDay);
                     
                     if(fileIndex < directory.listFiles().length)
                     {

@@ -242,17 +242,21 @@ public class WeatherFrame extends javax.swing.JFrame {
         
         monthComboBox.setModel(new DefaultComboBoxModel());
         monthComboBox.addItemListener(new ItemListener(){
-            @Override
-            public void itemStateChanged(java.awt.event.ItemEvent event){
+        @Override
+        public void itemStateChanged(java.awt.event.ItemEvent event){
                 System.out.println(event.getItem() + " " + monthComboBox.getSelectedIndex());
                 dayComboBox.removeAllItems();
                 fillDayComboBox(yearsList.get(yearComboBox.getSelectedIndex())
                         .months.get(monthComboBox.getSelectedIndex()));
-                
             }
         });
 
         dayComboBox.setModel(new javax.swing.DefaultComboBoxModel());
+        dayComboBox.addItemListener(new ItemListener(){
+        public void itemStateChanged(java.awt.event.ItemEvent event){
+                System.out.println(event.getItem() + " " + dayComboBox.getSelectedIndex());        
+            }
+        });
         
         FileMenu.setText("File");
         FileMenu.addActionListener(new ActionListener() {
@@ -441,6 +445,14 @@ public class WeatherFrame extends javax.swing.JFrame {
 
     }
     private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        TemperatureBtn.setSelected(false);
+        HumidityBtn.setSelected(false);
+        BarometricPressureBtn.setSelected(false);
+        WindSpeedBtn.setSelected(false);
+        WindChillBtn.setSelected(false);
+        HeatIndexBtn.setSelected(false);
+        UVIndexBtn.setSelected(false);
+        RainfallBtn.setSelected(false);
         collection.updateSeries(yearsList, yearComboBox.getSelectedIndex(),
                 monthComboBox.getSelectedIndex(), 
                 dayComboBox.getSelectedIndex(), displayComboBox.getSelectedItem().toString());
@@ -474,8 +486,8 @@ public class WeatherFrame extends javax.swing.JFrame {
 
     private JFreeChart createChart()
     {
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                null, null, null, null);
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                null, null, null, dataset);
                 
         chart.setBackgroundPaint(white);
         
