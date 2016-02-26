@@ -59,6 +59,74 @@ public class XMLParser {
                             data.day = dayIndex;
                             tempDay.data.add(data);
                         }
+                        for (int k = 0; k < tempDay.data.size(); k++) {
+                            tempDay.meanTemp = tempDay.meanTemp + Integer.parseInt(tempDay.data.get(k).temperature);
+                            tempDay.meanWindSpeed = tempDay.meanWindSpeed + Integer.parseInt(tempDay.data.get(k).windSpeed);
+                            tempDay.totalRainfall = tempDay.totalRainfall + Integer.parseInt(tempDay.data.get(k).rainfall);
+                            tempMonth.meanTemp = tempMonth.meanTemp + Integer.parseInt(tempDay.data.get(k).temperature);
+                            tempMonth.meanWindSpeed = tempMonth.meanWindSpeed + Integer.parseInt(tempDay.data.get(k).windSpeed);
+                            tempMonth.totalRainfall = tempMonth.totalRainfall + Integer.parseInt(tempDay.data.get(k).rainfall);
+                            tempYear.meanTemp = tempYear.meanTemp + Integer.parseInt(tempDay.data.get(k).temperature);
+                            tempYear.meanWindSpeed = tempYear.meanWindSpeed + Integer.parseInt(tempDay.data.get(k).windSpeed);
+                            tempYear.totalRainfall = tempYear.totalRainfall + Integer.parseInt(tempDay.data.get(k).rainfall);
+                            
+                            
+                            if(tempDay.highTemp < Integer.parseInt(tempDay.data.get(k).temperature)){
+                                tempDay.highTemp = Integer.parseInt(tempDay.data.get(k).temperature);
+                                tempDay.highDate = tempDay.data.get(k).date;
+                                tempDay.highTime = tempDay.data.get(k).time;
+                               
+                            }
+                            if(tempMonth.highTemp < Integer.parseInt(tempDay.data.get(k).temperature)){
+                                tempMonth.highTemp = Integer.parseInt(tempDay.data.get(k).temperature);
+                                tempMonth.highDate = tempDay.data.get(k).date;
+                                tempMonth.highTime = tempDay.data.get(k).time;
+                                
+                            
+                               
+                            }
+                            if(tempYear.highTemp < Integer.parseInt(tempDay.data.get(k).temperature)){
+                                tempYear.highTemp = Integer.parseInt(tempDay.data.get(k).temperature);
+                                tempYear.highDate = tempDay.data.get(k).date;
+                                tempYear.highTime = tempDay.data.get(k).time;
+
+                            }
+                            
+                            if(tempDay.lowTemp > Integer.parseInt(tempDay.data.get(k).temperature)){
+                                tempDay.lowTemp = Integer.parseInt(tempDay.data.get(k).temperature);
+                                tempDay.lowDate = tempDay.data.get(k).date;
+                                tempDay.lowTime = tempDay.data.get(k).time;
+                            }
+                            if(tempMonth.lowTemp > Integer.parseInt(tempDay.data.get(k).temperature)){
+                                tempMonth.lowTemp = Integer.parseInt(tempDay.data.get(k).temperature);
+                                tempMonth.lowDate = tempDay.data.get(k).date;
+                                tempMonth.lowTime = tempDay.data.get(k).time;
+                            }
+                            if(tempYear.lowTemp > Integer.parseInt(tempDay.data.get(k).temperature)){
+                                tempYear.lowTemp = Integer.parseInt(tempDay.data.get(k).temperature);
+                                tempYear.lowDate = tempDay.data.get(k).date;
+                                tempYear.lowTime = tempDay.data.get(k).time;
+                            }
+                            
+                            if(tempDay.maxWindSpeed < Integer.parseInt(tempDay.data.get(k).windSpeed)){
+                                tempDay.maxWindSpeed = Integer.parseInt(tempDay.data.get(k).windSpeed);
+                                tempDay.windSpeedDate = tempDay.data.get(k).date;
+                                tempDay.windSpeedTime = tempDay.data.get(k).time;
+                            }
+                            if(tempMonth.maxWindSpeed < Integer.parseInt(tempDay.data.get(k).windSpeed)){
+                                tempMonth.maxWindSpeed = Integer.parseInt(tempDay.data.get(k).windSpeed);
+                                tempMonth.windSpeedDate = tempDay.data.get(k).date;
+                                tempMonth.windSpeedTime = tempDay.data.get(k).time;
+                            }
+                            if(tempYear.maxWindSpeed < Integer.parseInt(tempDay.data.get(k).windSpeed)){
+                                tempYear.maxWindSpeed = Integer.parseInt(tempDay.data.get(k).windSpeed);
+                                tempYear.windSpeedDate = tempDay.data.get(k).date;
+                                tempYear.windSpeedTime = tempDay.data.get(k).time;
+                            }
+                            
+                            
+                        }
+                        
 
                         tempMonth.days.add(tempDay);
                         tempYear.days.add(tempDay); 

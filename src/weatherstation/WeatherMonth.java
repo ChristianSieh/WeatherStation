@@ -14,6 +14,19 @@ import java.util.ArrayList;
 public class WeatherMonth {
     
     public int month;
+    public double meanTemp;
+    public double highTemp;
+    public double lowTemp;
+    public String highDate;
+    public String lowDate;
+    public String highTime;
+    public String lowTime;
+    public double meanWindSpeed;
+    public double maxWindSpeed;
+    public String windSpeedDate;
+    public String windSpeedTime;
+    public String windDirection;
+    public double totalRainfall;
     ArrayList<WeatherDay> days;
     
     WeatherMonth(int monthValue)
