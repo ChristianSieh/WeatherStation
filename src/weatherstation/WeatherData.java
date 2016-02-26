@@ -15,16 +15,16 @@ public class WeatherData {
     
     public String date;
     public String time;
-    public String temperature;
-    public String humidity;
-    public String barometer;
-    public String windSpeed;
+    public Double temperature;
+    public Double humidity;
+    public Double barometer;
+    public Double windSpeed;
     public String windDirection;
-    public String windGust;
-    public String windChill;
-    public String heatIndex;
-    public String uvIndex;
-    public String rainfall;
+    public Double windGust;
+    public Double windChill;
+    public Double heatIndex;
+    public Double uvIndex;
+    public Double rainfall;
     public int year;
     public int month;
     public int day;
@@ -55,33 +55,33 @@ public class WeatherData {
         }
         child = xmlData.getChild("temperature");
         if(child != null)
-            temperature = child.getValue().trim();
+            temperature = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("humidity");
         if(child != null)
-            humidity = child.getValue().trim();
+            humidity = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("barometer");
         if(child != null)
-            barometer = child.getValue().trim();
+            barometer = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("windspeed");
         if(child != null)
-            windSpeed = child.getValue().trim();
+            windSpeed = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("winddirection");
         if(child != null)
             windDirection = child.getValue().trim();
         child = xmlData.getChild("windgust");
         if(child != null)
-            windGust = child.getValue().trim();
+            windGust = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("windchill");
         if(child != null)
-            windChill = child.getValue().trim();
+            windChill = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("heatindex");
         if(child != null)
-            heatIndex = child.getValue().trim();
+            heatIndex = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("uvindex");
         if(child != null)
-            uvIndex = child.getValue().trim();
+            uvIndex = Double.parseDouble(child.getValue().trim());
         child = xmlData.getChild("rainfall");
         if(child != null)
-            rainfall = child.getValue().trim();
+            rainfall = Double.parseDouble(child.getValue().trim());
     }
 }
