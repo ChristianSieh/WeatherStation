@@ -53,34 +53,44 @@ public class WeatherCollection extends TimeSeriesCollection
         {
             for(int i = 0; i < yearsList.get(year).days.size(); i++)
             {
+                WeatherDay tempDay = yearsList.get(year).days.get(i);
+                
                 for(int j = 0; j < yearsList.get(year).days.get(i).data.size(); j++)
                 {
-                    temperatureSeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).temperature));
-                    humiditySeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).humidity));
-                    barometricSeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).barometer));
-                    windSpeedSeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).windSpeed));
-                    windChillSeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).windChill));
-                    heatIndexSeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).heatIndex));
-                    uvIndexSeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).uvIndex));
-                    rainfallSeries.add(null, Integer.parseInt(yearsList.get(year).days.get(i).data.get(j).rainfall));
+                    WeatherData tempData = tempDay.data.get(j);
+                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
+                    temperatureSeries.add(minuteType, Float.parseFloat(tempData.temperature));
+                    humiditySeries.add(minuteType, Float.parseFloat(tempData.humidity));
+                    barometricSeries.add(minuteType, Float.parseFloat(tempData.barometer));
+                    windSpeedSeries.add(minuteType, Float.parseFloat(tempData.windSpeed));
+                    windChillSeries.add(minuteType, Float.parseFloat(tempData.windChill));
+                    heatIndexSeries.add(minuteType, Float.parseFloat(tempData.heatIndex));
+                    uvIndexSeries.add(minuteType, Float.parseFloat(tempData.uvIndex));
+                    rainfallSeries.add(minuteType, Float.parseFloat(tempData.rainfall));
                 }
             }
         }
         
         else if(display == "Month")
         {
-            for(int i = 0; i < yearsList.get(year).months.get(month).days.size(); i++)
+            WeatherMonth tempMonth = yearsList.get(year).months.get(month);
+            
+            for(int i = 0; i < tempMonth.days.size(); i++)
             {
-                for(int j = 0; j < yearsList.get(year).months.get(month).days.get(i).data.size(); j++)
+                WeatherDay tempDay = tempMonth.days.get(i);
+                
+                for(int j = 0; j < tempDay.data.size(); j++)
                 {
-                    temperatureSeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).temperature));
-                    humiditySeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).humidity));
-                    barometricSeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).barometer));
-                    windSpeedSeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).windSpeed));
-                    windChillSeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).windChill));
-                    heatIndexSeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).heatIndex));
-                    uvIndexSeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).uvIndex));
-                    rainfallSeries.add(null, Integer.parseInt(yearsList.get(year).months.get(month).days.get(i).data.get(j).rainfall));
+                    WeatherData tempData = tempDay.data.get(j);
+                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
+                    temperatureSeries.add(minuteType, Float.parseFloat(tempData.temperature));
+                    humiditySeries.add(minuteType, Float.parseFloat(tempData.humidity));
+                    barometricSeries.add(minuteType, Float.parseFloat(tempData.barometer));
+                    windSpeedSeries.add(minuteType, Float.parseFloat(tempData.windSpeed));
+                    windChillSeries.add(minuteType, Float.parseFloat(tempData.windChill));
+                    heatIndexSeries.add(minuteType, Float.parseFloat(tempData.heatIndex));
+                    uvIndexSeries.add(minuteType, Float.parseFloat(tempData.uvIndex));
+                    rainfallSeries.add(minuteType, Float.parseFloat(tempData.rainfall));
                 }
             }
         }
@@ -98,14 +108,14 @@ public class WeatherCollection extends TimeSeriesCollection
             {
                 WeatherData tempData = tempDay.data.get(i);
                 Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
-                temperatureSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).temperature));
-                humiditySeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).humidity));
-                barometricSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).barometer));
-                windSpeedSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).windSpeed));
-                windChillSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).windChill));
-                heatIndexSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).heatIndex));
-                uvIndexSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).uvIndex));
-                rainfallSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).rainfall));
+                temperatureSeries.add(minuteType, Float.parseFloat(tempData.temperature));
+                humiditySeries.add(minuteType, Float.parseFloat(tempData.humidity));
+                barometricSeries.add(minuteType, Float.parseFloat(tempData.barometer));
+                windSpeedSeries.add(minuteType, Float.parseFloat(tempData.windSpeed));
+                windChillSeries.add(minuteType, Float.parseFloat(tempData.windChill));
+                heatIndexSeries.add(minuteType, Float.parseFloat(tempData.heatIndex));
+                uvIndexSeries.add(minuteType, Float.parseFloat(tempData.uvIndex));
+                rainfallSeries.add(minuteType, Float.parseFloat(tempData.rainfall));
             }
         }
     }
