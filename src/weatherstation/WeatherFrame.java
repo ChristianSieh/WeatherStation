@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.*;
 import org.jfree.chart.ChartFactory;
@@ -18,8 +17,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -38,7 +35,6 @@ public class WeatherFrame extends javax.swing.JFrame {
 
         fileChooser = new JFileChooser();
         xmlParser = new XMLParser();
-        TimePanel = new JPanel();
         dayComboBox = new JComboBox<Integer>();
         plotChart = createChart();
         collection = new WeatherCollection();
@@ -244,7 +240,6 @@ public class WeatherFrame extends javax.swing.JFrame {
         monthComboBox.addItemListener(new ItemListener(){
         @Override
         public void itemStateChanged(java.awt.event.ItemEvent event){
-                System.out.println(event.getItem() + " " + monthComboBox.getSelectedIndex());
                 dayComboBox.removeAllItems();
                 fillDayComboBox(yearsList.get(yearComboBox.getSelectedIndex())
                         .months.get(monthComboBox.getSelectedIndex()));
@@ -252,11 +247,6 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
 
         dayComboBox.setModel(new javax.swing.DefaultComboBoxModel());
-        dayComboBox.addItemListener(new ItemListener(){
-        public void itemStateChanged(java.awt.event.ItemEvent event){
-                System.out.println(event.getItem() + " " + dayComboBox.getSelectedIndex());        
-            }
-        });
         
         FileMenu.setText("File");
         FileMenu.addActionListener(new ActionListener() {
@@ -453,6 +443,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         HeatIndexBtn.setSelected(false);
         UVIndexBtn.setSelected(false);
         RainfallBtn.setSelected(false);
+        
         collection.updateSeries(yearsList, yearComboBox.getSelectedIndex(),
                 monthComboBox.getSelectedIndex(), 
                 dayComboBox.getSelectedIndex(), displayComboBox.getSelectedItem().toString());
@@ -564,7 +555,6 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JToggleButton RainfallBtn;
     private JLabel TempGuagelabel;
     private JToggleButton TemperatureBtn;
-    private JPanel TimePanel;
     private JToggleButton UVIndexBtn;
     private JToggleButton WindChillBtn;
     private JToggleButton WindSpeedBtn;
