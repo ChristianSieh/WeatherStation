@@ -29,11 +29,11 @@ public class WeatherCollection extends TimeSeriesCollection
     {
         temperatureSeries = new TimeSeries("Temperature");
         humiditySeries = new TimeSeries("Humidity");
-        barometricSeries = new TimeSeries("Barometric Pressure");
-        windSpeedSeries = new TimeSeries("Wind Speed");
-        windChillSeries = new TimeSeries("Wind Chill");
-        heatIndexSeries = new TimeSeries("Heat Index");
-        uvIndexSeries = new TimeSeries("UV Index");
+        barometricSeries = new TimeSeries("BarometricPressure");
+        windSpeedSeries = new TimeSeries("WindSpeed");
+        windChillSeries = new TimeSeries("WindChill");
+        heatIndexSeries = new TimeSeries("HeatIndex");
+        uvIndexSeries = new TimeSeries("UVIndex");
         rainfallSeries = new TimeSeries("Rainfall");
     }
     
@@ -97,15 +97,15 @@ public class WeatherCollection extends TimeSeriesCollection
             for(int i = 0; i < tempDay.data.size(); i++)
             {
                 WeatherData tempData = tempDay.data.get(i);
-                Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month, tempData.year);
-                temperatureSeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).temperature));
-                humiditySeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).humidity));
-                barometricSeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).barometer));
-                windSpeedSeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).windSpeed));
-                windChillSeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).windChill));
-                heatIndexSeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).heatIndex));
-                uvIndexSeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).uvIndex));
-                rainfallSeries.add(minuteType, Integer.parseInt(yearsList.get(year).months.get(month).days.get(day).data.get(i).rainfall));
+                Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
+                temperatureSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).temperature));
+                humiditySeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).humidity));
+                barometricSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).barometer));
+                windSpeedSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).windSpeed));
+                windChillSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).windChill));
+                heatIndexSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).heatIndex));
+                uvIndexSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).uvIndex));
+                rainfallSeries.add(minuteType, Float.parseFloat(yearsList.get(year).months.get(month).days.get(day).data.get(i).rainfall));
             }
         }
     }
@@ -115,35 +115,35 @@ public class WeatherCollection extends TimeSeriesCollection
         Series temp = Series.valueOf(label);
         
         switch (temp) {
-            case temperature:
+            case Temperature:
                 addSeries(temperatureSeries);
                 break;
             
-            case humidity:
+            case Humidity:
                 addSeries(humiditySeries);
                 break;
                 
-            case barometricPressure:
+            case BarometricPressure:
                 addSeries(barometricSeries);
                 break;
                 
-            case windSpeed:
+            case WindSpeed:
                 addSeries(windSpeedSeries);
                 break;
                 
-            case windChill:
+            case WindChill:
                 addSeries(windChillSeries);
                 break;
                 
-            case heatIndex:
+            case HeatIndex:
                 addSeries(heatIndexSeries);
                 break;
                 
-            case uvIndex:
+            case UVIndex:
                 addSeries(uvIndexSeries);
                 break;
                 
-            case rainfall:
+            case Rainfall:
                 addSeries(rainfallSeries);
                 break;
         }
@@ -156,13 +156,13 @@ public class WeatherCollection extends TimeSeriesCollection
     }
     
     private enum Series{
-        temperature,
-        humidity,
-        barometricPressure,
-        windSpeed,
-        windChill,
-        heatIndex,
-        uvIndex,
-        rainfall
+        Temperature,
+        Humidity,
+        BarometricPressure,
+        WindSpeed,
+        WindChill,
+        HeatIndex,
+        UVIndex,
+        Rainfall
     }
 }

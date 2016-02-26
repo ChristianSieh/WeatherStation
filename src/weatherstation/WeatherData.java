@@ -36,12 +36,12 @@ public class WeatherData {
         Element child = xmlData.getChild("date");
         if(child != null)
         {
-            date = child.getValue();
+            date = child.getValue().trim();
         }
         child = xmlData.getChild("time");
         if(child != null)
         {
-            time = child.getValue();
+            time = child.getValue().trim();
             String[] temp = time.split(":");
             for(int i = 0; i < temp.length; i++)
             {
@@ -55,33 +55,33 @@ public class WeatherData {
         }
         child = xmlData.getChild("temperature");
         if(child != null)
-            temperature = child.getValue();
+            temperature = child.getValue().trim();
         child = xmlData.getChild("humidity");
         if(child != null)
-            humidity = child.getValue();
+            humidity = child.getValue().trim();
         child = xmlData.getChild("barometer");
         if(child != null)
-            barometer = child.getValue();
+            barometer = child.getValue().trim();
         child = xmlData.getChild("windspeed");
         if(child != null)
-            windSpeed = child.getValue();
+            windSpeed = child.getValue().trim();
         child = xmlData.getChild("winddirection");
         if(child != null)
-            windDirection = child.getValue();
+            windDirection = child.getValue().trim();
         child = xmlData.getChild("windgust");
         if(child != null)
-            windGust = child.getValue();
+            windGust = child.getValue().trim();
         child = xmlData.getChild("windchill");
         if(child != null)
-            windChill = child.getValue();
+            windChill = child.getValue().trim();
         child = xmlData.getChild("heatindex");
         if(child != null)
-            heatIndex = child.getValue();
+            heatIndex = child.getValue().trim();
         child = xmlData.getChild("uvindex");
         if(child != null)
-            uvIndex = child.getValue();
+            uvIndex = child.getValue().trim();
         child = xmlData.getChild("rainfall");
         if(child != null)
-            rainfall = child.getValue();
+            rainfall = child.getValue().trim();
     }
 }

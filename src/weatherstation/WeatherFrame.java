@@ -41,7 +41,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         TimePanel = new JPanel();
         dayComboBox = new JComboBox<Integer>();
         plotChart = createChart();
-        collection = new XYSeriesCollection();
+        collection = new WeatherCollection();
         plotPanel = new ChartPanel(plotChart);
         ButtonPanel = new JPanel();
         TemperatureBtn = new JToggleButton();
@@ -80,6 +80,7 @@ public class WeatherFrame extends javax.swing.JFrame {
              add("December");
         }};
         filled = false;
+        SubmitBtn = new JButton("Submit");
 
         //fileChooser.setFileFilter(new xmlFilter());
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -108,8 +109,8 @@ public class WeatherFrame extends javax.swing.JFrame {
         HumidityBtn.setToolTipText("Humidity");
         HumidityBtn.setFocusPainted(false);
         HumidityBtn.setPreferredSize(new Dimension(66, 66));
-        HumidityBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        HumidityBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 HumidityBtnActionPerformed(evt);
             }
         });
@@ -120,6 +121,11 @@ public class WeatherFrame extends javax.swing.JFrame {
         BarometricPressureBtn.setToolTipText("Barometric Pressure");
         BarometricPressureBtn.setFocusPainted(false);
         BarometricPressureBtn.setPreferredSize(new Dimension(66, 66));
+        BarometricPressureBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                BarometricPressureBtnActionPerformed(evt);
+            }
+        });
         ButtonPanel.add(BarometricPressureBtn);
 
         WindSpeedBtn.setIcon(new ImageIcon(
@@ -127,6 +133,11 @@ public class WeatherFrame extends javax.swing.JFrame {
         WindSpeedBtn.setToolTipText("Wind Speed");
         WindSpeedBtn.setFocusPainted(false);
         WindSpeedBtn.setPreferredSize(new Dimension(66, 66));
+        WindSpeedBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                WindSpeedBtnActionPerformed(evt);
+            }
+        });
         ButtonPanel.add(WindSpeedBtn);
 
         WindChillBtn.setIcon(new ImageIcon(
@@ -134,6 +145,11 @@ public class WeatherFrame extends javax.swing.JFrame {
         WindChillBtn.setToolTipText("Wind Chill");
         WindChillBtn.setFocusPainted(false);
         WindChillBtn.setPreferredSize(new Dimension(66, 66));
+        WindChillBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                WindChillBtnActionPerformed(evt);
+            }
+        });
         ButtonPanel.add(WindChillBtn);
 
         HeatIndexBtn.setIcon(new javax.swing.ImageIcon(
@@ -141,18 +157,24 @@ public class WeatherFrame extends javax.swing.JFrame {
         HeatIndexBtn.setToolTipText("Heat Index");
         HeatIndexBtn.setFocusPainted(false);
         HeatIndexBtn.setPreferredSize(new Dimension(66, 66));
-        HeatIndexBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        HeatIndexBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 HeatIndexBtnActionPerformed(evt);
             }
         });
         ButtonPanel.add(HeatIndexBtn);
 
+        
         UVIndexBtn.setIcon(new ImageIcon(
                 getClass().getResource("/weatherstation/icons/uvindex.png")));
         UVIndexBtn.setToolTipText("UV Index");
         UVIndexBtn.setFocusPainted(false);
         UVIndexBtn.setPreferredSize(new Dimension(66, 66));
+        UVIndexBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                UVIndexBtnActionPerformed(evt);
+            }
+        });
         ButtonPanel.add(UVIndexBtn);
 
         RainfallBtn.setIcon(new javax.swing.ImageIcon(
@@ -160,8 +182,20 @@ public class WeatherFrame extends javax.swing.JFrame {
         RainfallBtn.setToolTipText("Rainfall");
         RainfallBtn.setFocusPainted(false);
         RainfallBtn.setPreferredSize(new Dimension(66, 66));
+        RainfallBtn.addItemListener(new ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                RainfallBtnActionPerformed(evt);
+            }
+        });
         ButtonPanel.add(RainfallBtn);
 
+        SubmitBtn.setPreferredSize(new Dimension(100, 25));
+        SubmitBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SubmitBtnActionPerformed(evt);
+            }
+        });
+        
         TempGuagelabel.setText("Down here have all the guages");
 
         javax.swing.GroupLayout GuagesPanelLayout = new GroupLayout(GuagesPanel);
@@ -181,8 +215,6 @@ public class WeatherFrame extends javax.swing.JFrame {
                         27, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(80, Short.MAX_VALUE))
         );
-
-
 
         YearLabel.setText("Year");
 
@@ -271,8 +303,8 @@ public class WeatherFrame extends javax.swing.JFrame {
                         .addComponent(displayComboBox, GroupLayout.PREFERRED_SIZE,
                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TimePanel, GroupLayout.DEFAULT_SIZE,
-                                GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(SubmitBtn, GroupLayout.PREFERRED_SIZE,
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(plotPanel, GroupLayout.DEFAULT_SIZE,
                                 GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -287,8 +319,6 @@ public class WeatherFrame extends javax.swing.JFrame {
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(TimePanel, GroupLayout.PREFERRED_SIZE,
-                            GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(yearComboBox, GroupLayout.PREFERRED_SIZE,
                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -301,6 +331,8 @@ public class WeatherFrame extends javax.swing.JFrame {
                         .addComponent(dayComboBox, GroupLayout.PREFERRED_SIZE,
                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addComponent(displayComboBox, GroupLayout.PREFERRED_SIZE,
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SubmitBtn, GroupLayout.PREFERRED_SIZE,
                                 GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
@@ -336,44 +368,93 @@ public class WeatherFrame extends javax.swing.JFrame {
     private void TemperatureBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("Temperature", list);
+            addSeries("Temperature");
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
             removeSeries("Temperature");
     }
-    private void HumidityBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    
+    private void HumidityBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("Humidity");
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("Humidity");
+    }
+    
+    private void BarometricPressureBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("BarometricPressure");
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("BarometricPressure");
+    }
+    
+    private void WindSpeedBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("WindSpeed");
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("WindSpeed");
+    }
+    
+    private void WindChillBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("WindChill");
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("WindChill");
     }
 
-    private void HeatIndexBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void HeatIndexBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("HeatIndex");
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("HeatIndex");
+    }
+    
+    private void UVIndexBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("UVIndex");
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("UVIndex");
+    }
+    
+    private void RainfallBtnActionPerformed(java.awt.event.ItemEvent evt) {
+        if(evt.getStateChange() ==  ItemEvent.SELECTED)
+        {
+            addSeries("Rainfall");
+        }
+        else if(evt.getStateChange() == ItemEvent.DESELECTED)
+            removeSeries("Rainfall");
     }
 
     private void FileMenuActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
-    
-    private void addSeries(String label, ArrayList<WeatherYear> list)
-    {   
-        XYSeries series = new XYSeries(label);
-        series.add(1.0, 5.0);
-        series.add(2.0, 7.0);
-        series.add(3.0, 6.0);
-        series.add(4.0, 8.0);
-        series.add(5.0, 4.0);
-        series.add(6.0, 4.0);
-        series.add(7.0, 2.0);
-        series.add(8.0, 1.0);
-        
-        collection.addSeries(series);
+    private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        collection.updateSeries(yearsList, yearComboBox.getSelectedIndex(),
+                monthComboBox.getSelectedIndex(), 
+                dayComboBox.getSelectedIndex(), displayComboBox.getSelectedItem().toString());
+        updateDataset();
+    }
+    private void addSeries(String label)
+    {           
+        collection.addSeries(label);
         updateDataset();
     }
     
     private void removeSeries(String label)
     {
-        XYSeries series = new XYSeries(label);
-        
-        collection.removeSeries(series);
+        collection.removeSeries(label);
         updateDataset();
     }
     
@@ -400,8 +481,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         
         return chart;
     }
-    
-    ////////////////////////////////////////////////////////////
+
     private void fillYearComboBox() {
         
         for (int i = 0; i < yearsList.size(); i++)
@@ -489,9 +569,10 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JFreeChart plotChart;
     private ArrayList list;
     private XYDataset dataset;
-    private XYSeriesCollection collection;
+    private WeatherCollection collection;
     private XMLParser xmlParser;
     private ArrayList<WeatherYear> yearsList;
     private ArrayList<String> monthList;
     private boolean filled;
+    private JButton SubmitBtn;
 }
