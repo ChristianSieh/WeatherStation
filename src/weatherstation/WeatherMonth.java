@@ -29,10 +29,10 @@ public class WeatherMonth {
     public double totalRainfall;
     ArrayList<WeatherDay> days;
     
-    WeatherMonth(int monthValue, int daysInMonth)
+    WeatherMonth(int monthValue)
     {
            month = monthValue;
-           days = new ArrayList<WeatherDay>(daysInMonth);
+           days = new ArrayList<WeatherDay>();
     }
     
     
