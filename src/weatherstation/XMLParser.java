@@ -8,6 +8,7 @@ package weatherstation;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import org.jdom2.input.SAXBuilder;
@@ -133,13 +134,31 @@ public class XMLParser {
                     
                     if(fileIndex < directory.listFiles().length)
                     {
+                        tempMonth.meanTemp = 
+                                tempMonth.meanTemp / tempMonth.days.size();
+                        tempMonth.meanWindSpeed = 
+                                tempMonth.meanWindSpeed / tempMonth.days.size();
+                        tempMonth.totalRainfall = 
+                                tempMonth.totalRainfall / tempMonth.days.size();
+                        
                         tempYear.months.add(tempMonth);
                         file = directory.listFiles()[fileIndex];
                         fileIndex++;
                         document = builder.build(file);
                         root = document.getRootElement();
                     }
+                    
+                    
                 }
+               
+                processWeeks(tempYear);
+                
+                tempYear.meanTemp = tempYear.meanTemp / tempYear.days.size();
+                tempYear.meanWindSpeed = 
+                        tempYear.meanWindSpeed / tempYear.days.size();
+                tempYear.totalRainfall = 
+                        tempYear.totalRainfall / tempYear.days.size();
+                
                 yearsList.add(tempYear);
             }
         }
@@ -149,4 +168,56 @@ public class XMLParser {
         }
     }
     
-}
+    public void processWeeks(WeatherYear year) {
+        
+        for (int i = 0; i < year.days.size(); i++)
+        {
+            Calendar c = Calendar.getInstance();
+            Date tempDate = new Date(year.year, year.days.get(i).month, (i+1) );
+            c.setTime(tempDate);
+            //Gets which week this day belongs to for that year
+            int weekOfYear = c.get(Calendar.WEEK_OF_YEAR);
+            //Set the day to have that week so we can use the week number for 
+            //displaying in the GUI
+	    year.days.get(i).week = weekOfYear;
+	    //Push the day into that week
+            year.weeks.get(year.days.get(i).week).days.add(year.days.get(i));
+            
+        }
+        for (int i = 0; i < year.weeks.size(); i++) {
+            for (int j = 0; j < year.weeks.get(i).days.size(); j++) {
+                year.weeks.get(i).meanTemp = year.weeks.get(i).days.get(j).meanTemp;
+                year.weeks.get(i).meanWindSpeed = year.weeks.get(i).days.get(j).meanWindSpeed;
+                year.weeks.get(i).totalRainfall = year.weeks.get(i).days.get(j).totalRainfall;
+                
+                if (year.weeks.get(i).highTemp < year.weeks.get(i).days.get(j).highTemp) {
+                    year.weeks.get(i).highTemp = year.weeks.get(i).days.get(j).highTemp;
+                    year.weeks.get(i).highDate = year.weeks.get(i).days.get(j).highDate;
+                    year.weeks.get(i).highTime = year.weeks.get(i).days.get(j).highTime;
+                }
+                
+                if (year.weeks.get(i).lowTemp > year.weeks.get(i).days.get(j).lowTemp) {
+                    year.weeks.get(i).lowTemp = year.weeks.get(i).days.get(j).lowTemp;
+                    year.weeks.get(i).lowDate = year.weeks.get(i).days.get(j).lowDate;
+                    year.weeks.get(i).lowTime = year.weeks.get(i).days.get(j).lowTime;
+                }
+                
+                if (year.weeks.get(i).maxWindSpeed < year.weeks.get(i).days.get(j).maxWindSpeed) {
+                    year.weeks.get(i).maxWindSpeed = year.weeks.get(i).days.get(j).maxWindSpeed;
+                    year.weeks.get(i).windSpeedDate = year.weeks.get(i).days.get(j).windSpeedDate;
+                    year.weeks.get(i).windSpeedTime = year.weeks.get(i).days.get(j).windSpeedTime;
+                }
+            }
+            
+            year.weeks.get(i).meanTemp =  
+                    (year.weeks.get(i).meanTemp / year.weeks.get(i).days.size());
+            year.weeks.get(i).meanWindSpeed = 
+                    (year.weeks.get(i).meanWindSpeed / year.weeks.get(i).days.size());
+            year.weeks.get(i).totalRainfall = 
+                    (year.weeks.get(i).totalRainfall / year.weeks.get(i).days.size());
+                
+        }
+            
+    }
+        
+ }
