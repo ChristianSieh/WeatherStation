@@ -26,6 +26,7 @@ public class XMLParser {
         try
         {
             int fileIndex = 0;
+            
             while(fileIndex < directory.listFiles().length)
             {
                 File file = directory.listFiles()[fileIndex];
@@ -36,19 +37,78 @@ public class XMLParser {
                 String temp = fileName.split("-")[0];
                 int yearNum = Integer.parseInt(temp);
 
+                String yearString = "NULL";
                 WeatherYear tempYear = new WeatherYear(yearNum);
+                
+                // counters for pervailing winds 
+                // there has to be a better way! 
+                int yearNCounter = 0;
+                int yearNNECounter = 0;
+                int yearNECounter = 0;
+                int yearENECounter = 0;
+                int yearECounter = 0;
+                int yearESECounter = 0;
+                int yearSECounter = 0;
+                int yearSSECounter = 0;
+                int yearSCounter = 0;
+                int yearSSWCounter = 0;
+                int yearSWCounter = 0;
+                int yearWSWCounter = 0;
+                int yearWCounter = 0;
+                int yearWNWCounter = 0;
+                int yearNWCounter = 0;
+                int yearNNWCounter = 0;
+                int yearHighest = 0;
 
+                String monthString = "NULL";
                 for(int monthIndex = 0; monthIndex < 12; monthIndex++)
                 {
                     WeatherMonth tempMonth = new WeatherMonth(monthIndex);
+                    int monthNCounter = 0;
+                    int monthNNECounter = 0;
+                    int monthNECounter = 0;
+                    int monthENECounter = 0;
+                    int monthECounter = 0;
+                    int monthESECounter = 0;
+                    int monthSECounter = 0;
+                    int monthSSECounter = 0;
+                    int monthSCounter = 0;
+                    int monthSSWCounter = 0;
+                    int monthSWCounter = 0;
+                    int monthWSWCounter = 0;
+                    int monthWCounter = 0;
+                    int monthWNWCounter = 0;
+                    int monthNWCounter = 0;
+                    int monthNNWCounter = 0;
+                    int monthHighest = 0;
 
                     Calendar cal = new GregorianCalendar(tempYear.year, tempMonth.month, 1);
 
                     int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
+                    
+                    String dayString = "NULL";
                     for(int dayIndex = 0; dayIndex < daysInMonth; dayIndex++)
                     {
                         WeatherDay tempDay = new WeatherDay(dayIndex);
+                        
+                        int dayNCounter = 0;
+                        int dayNNECounter = 0;
+                        int dayNECounter = 0;
+                        int dayENECounter = 0;
+                        int dayECounter = 0;
+                        int dayESECounter = 0;
+                        int daySECounter = 0;
+                        int daySSECounter = 0;
+                        int daySCounter = 0;
+                        int daySSWCounter = 0;
+                        int daySWCounter = 0;
+                        int dayWSWCounter = 0;
+                        int dayWCounter = 0;
+                        int dayWNWCounter = 0;
+                        int dayNWCounter = 0;
+                        int dayNNWCounter = 0;
+                        int dayHighest = 0;
+                        
 
                         List<Element> weatherList = root.getChildren();
                         for ( int j = 0; j < 96; j++ )
@@ -60,15 +120,128 @@ public class XMLParser {
                             data.day = dayIndex;
                             tempDay.data.add(data);
                         }
+                        
                         for (int k = 0; k < tempDay.data.size(); k++) {
+                            if("N".equals(tempDay.data.get(k).windDirection)) {
+                                dayNCounter += 1;
+                                if (dayNCounter > dayHighest) {
+                                    dayHighest = dayNCounter;
+                                    dayString = "N";
+                                    
+                                }
+                            }
+                            if("NNE".equals(tempDay.data.get(k).windDirection)) {
+                                dayNNECounter += 1;
+                                if (dayNNECounter > dayHighest) {
+                                    dayHighest = dayNNECounter;
+                                    dayString = "NNE";
+                                }
+                            }
+                            if("NE".equals(tempDay.data.get(k).windDirection)) {
+                                dayNECounter += 1;
+                                if (dayNECounter > dayHighest) {
+                                    dayHighest = dayNECounter;
+                                    dayString = "NE";
+                                }
+                            }
+                            if("ENE".equals(tempDay.data.get(k).windDirection)) {
+                                dayENECounter += 1;
+                                if (dayENECounter > dayHighest) {
+                                    dayHighest = dayENECounter;
+                                    dayString = "ENE";
+                                }
+                            }
+                            if("E".equals(tempDay.data.get(k).windDirection)) {
+                                dayECounter += 1;
+                                if (dayECounter > dayHighest) {
+                                    dayHighest = dayECounter;
+                                    dayString = "E";
+                                }
+                            }
+                            if("ESE".equals(tempDay.data.get(k).windDirection)) {
+                                dayESECounter += 1;
+                                if (dayESECounter > dayHighest) {
+                                    dayHighest = dayESECounter;
+                                    dayString = "ESE";
+                                }
+                            }
+                            if("SE".equals(tempDay.data.get(k).windDirection)) {
+                                daySECounter += 1;
+                                if (daySECounter > dayHighest) {
+                                    dayHighest = daySECounter;
+                                    dayString = "SE";
+                                }
+                            }
+                            if("SSE".equals(tempDay.data.get(k).windDirection)) {
+                                daySSECounter += 1;
+                                 if (daySSECounter > dayHighest) {
+                                    dayHighest = daySSECounter;
+                                    dayString = "SSE";
+                                }
+                            }
+                            if("S".equals(tempDay.data.get(k).windDirection)) {
+                                daySCounter += 1;
+                                if (daySCounter > dayHighest) {
+                                    dayHighest = daySCounter;
+                                    dayString = "S";
+                                }
+                            }
+                            if("SSW".equals(tempDay.data.get(k).windDirection)) {
+                                daySSWCounter += 1;
+                                if (daySSWCounter > dayHighest) {
+                                    dayHighest = daySSWCounter;
+                                    dayString = "SSW";
+                                }
+                            }
+                            if("SW".equals(tempDay.data.get(k).windDirection)) {
+                                daySWCounter += 1;
+                                if (daySWCounter > dayHighest) {
+                                    dayHighest = daySWCounter;
+                                    dayString = "SW";
+                                }
+                            }
+                            if("WSW".equals(tempDay.data.get(k).windDirection)) {
+                                dayWSWCounter += 1;
+                                 if (dayWSWCounter > dayHighest) {
+                                    dayHighest = dayWSWCounter;
+                                    dayString = "WSW";
+                                }
+                            }
+                            if("W".equals(tempDay.data.get(k).windDirection)) {
+                                dayWCounter += 1;
+                                if (dayWCounter > dayHighest) {
+                                    dayHighest = dayWCounter;
+                                    dayString = "W";
+                                }
+                            }
+                            if("WNW".equals(tempDay.data.get(k).windDirection)) {
+                                dayWNWCounter += 1;
+                                if (dayWNWCounter > dayHighest) {
+                                    dayHighest = dayWNWCounter;
+                                    dayString = "WNW";
+                                }
+                            }
+                            if("NW".equals(tempDay.data.get(k).windDirection)) {
+                                dayNWCounter += 1;
+                                if (dayNWCounter > dayHighest) {
+                                    dayHighest = dayNWCounter;
+                                    dayString = "NW";
+                                }
+                            }
+                            if("NNW".equals(tempDay.data.get(k).windDirection)) {
+                                dayNNWCounter += 1;
+                                if (dayNNWCounter > dayHighest) {
+                                    dayHighest = dayNNWCounter;
+                                    dayString = "NNW";
+                                }
+                            }
+                            
                             tempDay.meanTemp = tempDay.meanTemp + tempDay.data.get(k).temperature;
                             tempDay.meanWindSpeed = tempDay.meanWindSpeed + tempDay.data.get(k).windSpeed;
                             tempDay.totalRainfall = tempDay.totalRainfall + tempDay.data.get(k).rainfall;
-                            tempMonth.meanTemp = tempMonth.meanTemp + tempDay.data.get(k).temperature;
-                            tempMonth.meanWindSpeed = tempMonth.meanWindSpeed + tempDay.data.get(k).windSpeed;
+                            
                             tempMonth.totalRainfall = tempMonth.totalRainfall + tempDay.data.get(k).rainfall;
-                            tempYear.meanTemp = tempYear.meanTemp + tempDay.data.get(k).temperature;
-                            tempYear.meanWindSpeed = tempYear.meanWindSpeed + tempDay.data.get(k).windSpeed;
+                            
                             tempYear.totalRainfall = tempYear.totalRainfall + tempDay.data.get(k).rainfall;
                             
                             
@@ -128,20 +301,264 @@ public class XMLParser {
                             
                         }
                         
+                        tempDay.windDirection = dayString; 
+                        
+                        tempDay.meanTemp = 
+                                tempDay.meanTemp / tempDay.data.size();
+                        tempDay.meanWindSpeed = 
+                                tempDay.meanWindSpeed / tempDay.data.size();
+                        
+                        tempMonth.meanTemp = tempMonth.meanTemp + tempDay.meanTemp;
+                        tempMonth.meanWindSpeed = tempMonth.meanWindSpeed + tempDay.meanWindSpeed;
+                        
+                        tempYear.meanTemp = tempYear.meanTemp + tempDay.meanTemp;
+                        tempYear.meanWindSpeed = tempYear.meanWindSpeed + tempDay.meanWindSpeed;
+                        
+
+                         if("N".equals(tempDay.windDirection)) {
+                                monthNCounter += 1;
+                                if (monthNCounter > monthHighest) {
+                                    monthHighest = monthNCounter;
+                                    monthString = "N";
+                                    
+                                }
+                            }
+                        if("NNE".equals(tempDay.windDirection)) {
+                            monthNNECounter += 1;
+                            if (monthNNECounter > monthHighest) {
+                                monthHighest = monthNNECounter;
+                                monthString = "NNE";
+                            }
+                        }
+                        if("NE".equals(tempDay.windDirection)) {
+                            monthNECounter += 1;
+                            if (monthNECounter > monthHighest) {
+                                monthHighest = monthNECounter;
+                                monthString = "NE";
+                            }
+                        }
+                        if("ENE".equals(tempDay.windDirection)) {
+                            monthENECounter += 1;
+                            if (monthENECounter > monthHighest) {
+                                monthHighest = monthENECounter;
+                                monthString = "ENE";
+                            }
+                        }
+                        if("E".equals(tempDay.windDirection)) {
+                            monthECounter += 1;
+                            if (monthECounter > monthHighest) {
+                                monthHighest = monthECounter;
+                                monthString = "E";
+                            }
+                        }
+                        if("ESE".equals(tempDay.windDirection)) {
+                            monthESECounter += 1;
+                            if (monthESECounter > monthHighest) {
+                                monthHighest = monthESECounter;
+                                monthString = "ESE";
+                            }
+                        }
+                        if("SE".equals(tempDay.windDirection)) {
+                            monthSECounter += 1;
+                            if (monthSECounter > monthHighest) {
+                                monthHighest = monthSECounter;
+                                monthString = "SE";
+                            }
+                        }
+                        if("SSE".equals(tempDay.windDirection)) {
+                            monthSSECounter += 1;
+                             if (monthSSECounter > monthHighest) {
+                                monthHighest = monthSSECounter;
+                                monthString = "SSE";
+                            }
+                        }
+                        if("S".equals(tempDay.windDirection)) {
+                            monthSCounter += 1;
+                            if (monthSCounter > monthHighest) {
+                                monthHighest = monthSCounter;
+                                monthString = "S";
+                            }
+                        }
+                        if("SSW".equals(tempDay.windDirection)) {
+                            monthSSWCounter += 1;
+                            if (monthSSWCounter > monthHighest) {
+                                monthHighest = monthSSWCounter;
+                                monthString = "SSW";
+                            }
+                        }
+                        if("SW".equals(tempDay.windDirection)) {
+                            monthSWCounter += 1;
+                            if (monthSWCounter > monthHighest) {
+                                monthHighest = monthSWCounter;
+                                monthString = "SW";
+                            }
+                        }
+                        if("WSW".equals(tempDay.windDirection)) {
+                            monthWSWCounter += 1;
+                             if (monthWSWCounter > monthHighest) {
+                                monthHighest = monthWSWCounter;
+                                monthString = "WSW";
+                            }
+                        }
+                        if("W".equals(tempDay.windDirection)) {
+                            monthWCounter += 1;
+                            if (monthWCounter > monthHighest) {
+                                monthHighest = monthWCounter;
+                                monthString = "W";
+                            }
+                        }
+                        if("WNW".equals(tempDay.windDirection)) {
+                            monthWNWCounter += 1;
+                            if (monthWNWCounter > monthHighest) {
+                                monthHighest = monthWNWCounter;
+                                monthString = "WNW";
+                            }
+                        }
+                        if("NW".equals(tempDay.windDirection)) {
+                            monthNWCounter += 1;
+                            if (monthNWCounter > monthHighest) {
+                                monthHighest = monthNWCounter;
+                                monthString = "NW";
+                            }
+                        }
+                        if("NNW".equals(tempDay.windDirection)) {
+                            monthNNWCounter += 1;
+                            if (monthNNWCounter > monthHighest) {
+                                monthHighest = monthNNWCounter;
+                                monthString = "NNW";
+                            }
+                        }
+                        
+                        
                         tempMonth.days.add(tempDay);
                         tempYear.days.add(tempDay); 
                     }
                     
                     if(fileIndex < directory.listFiles().length)
                     {
+                        tempMonth.windDirection = monthString;
                         tempMonth.meanTemp = 
                                 tempMonth.meanTemp / tempMonth.days.size();
                         tempMonth.meanWindSpeed = 
                                 tempMonth.meanWindSpeed / tempMonth.days.size();
-                        tempMonth.totalRainfall = 
-                                tempMonth.totalRainfall / tempMonth.days.size();
+
                         
                         tempYear.months.add(tempMonth);
+                        
+                         if("N".equals(tempMonth.windDirection)) {
+                                yearNCounter += 1;
+                                if (yearNCounter > yearHighest) {
+                                    yearHighest = yearNCounter;
+                                    yearString = "N";
+                                    
+                                }
+                            }
+                            if("NNE".equals(tempMonth.windDirection)) {
+                                yearNNECounter += 1;
+                                if (yearNNECounter > yearHighest) {
+                                    yearHighest = yearNNECounter;
+                                    yearString = "NNE";
+                                }
+                            }
+                            if("NE".equals(tempMonth.windDirection)) {
+                                yearNECounter += 1;
+                                if (yearNECounter > yearHighest) {
+                                    yearHighest = yearNECounter;
+                                    yearString = "NE";
+                                }
+                            }
+                            if("ENE".equals(tempMonth.windDirection)) {
+                                yearENECounter += 1;
+                                if (yearENECounter > yearHighest) {
+                                    yearHighest = yearENECounter;
+                                    yearString = "ENE";
+                                }
+                            }
+                            if("E".equals(tempMonth.windDirection)) {
+                                yearECounter += 1;
+                                if (yearECounter > yearHighest) {
+                                    yearHighest = yearECounter;
+                                    yearString = "E";
+                                }
+                            }
+                            if("ESE".equals(tempMonth.windDirection)) {
+                                yearESECounter += 1;
+                                if (yearESECounter > yearHighest) {
+                                    yearHighest = yearESECounter;
+                                    yearString = "ESE";
+                                }
+                            }
+                            if("SE".equals(tempMonth.windDirection)) {
+                                yearSECounter += 1;
+                                if (yearSECounter > yearHighest) {
+                                    yearHighest = yearSECounter;
+                                    yearString = "SE";
+                                }
+                            }
+                            if("SSE".equals(tempMonth.windDirection)) {
+                                yearSSECounter += 1;
+                                 if (yearSSECounter > yearHighest) {
+                                    yearHighest = yearSSECounter;
+                                    yearString = "SSE";
+                                }
+                            }
+                            if("S".equals(tempMonth.windDirection)) {
+                                yearSCounter += 1;
+                                if (yearSCounter > yearHighest) {
+                                    yearHighest = yearSCounter;
+                                    yearString = "S";
+                                }
+                            }
+                            if("SSW".equals(tempMonth.windDirection)) {
+                                yearSSWCounter += 1;
+                                if (yearSSWCounter > yearHighest) {
+                                    yearHighest = yearSSWCounter;
+                                    yearString = "SSW";
+                                }
+                            }
+                            if("SW".equals(tempMonth.windDirection)) {
+                                yearSWCounter += 1;
+                                if (yearSWCounter > yearHighest) {
+                                    yearHighest = yearSWCounter;
+                                    yearString = "SW";
+                                }
+                            }
+                            if("WSW".equals(tempMonth.windDirection)) {
+                                yearWSWCounter += 1;
+                                 if (yearWSWCounter > yearHighest) {
+                                    yearHighest = yearWSWCounter;
+                                    yearString = "WSW";
+                                }
+                            }
+                            if("W".equals(tempMonth.windDirection)) {
+                                yearWCounter += 1;
+                                if (yearWCounter > yearHighest) {
+                                    yearHighest = yearWCounter;
+                                    yearString = "W";
+                                }
+                            }
+                            if("WNW".equals(tempMonth.windDirection)) {
+                                yearWNWCounter += 1;
+                                if (yearWNWCounter > yearHighest) {
+                                    yearHighest = yearWNWCounter;
+                                    yearString = "WNW";
+                                }
+                            }
+                            if("NW".equals(tempMonth.windDirection)) {
+                                yearNWCounter += 1;
+                                if (yearNWCounter > yearHighest) {
+                                    yearHighest = yearNWCounter;
+                                    yearString = "NW";
+                                }
+                            }
+                            if("NNW".equals(tempMonth.windDirection)) {
+                                yearNNWCounter += 1;
+                                if (yearNNWCounter > yearHighest) {
+                                    yearHighest = yearNNWCounter;
+                                    yearString = "NNW";
+                                }
+                            }
+                        
                         file = directory.listFiles()[fileIndex];
                         fileIndex++;
                         document = builder.build(file);
@@ -150,16 +567,17 @@ public class XMLParser {
                     
                     
                 }
-               
+
                 processWeeks(tempYear);
                 
+                tempYear.windDirection = yearString;
                 tempYear.meanTemp = tempYear.meanTemp / tempYear.days.size();
                 tempYear.meanWindSpeed = 
                         tempYear.meanWindSpeed / tempYear.days.size();
-                tempYear.totalRainfall = 
-                        tempYear.totalRainfall / tempYear.days.size();
                 
                 yearsList.add(tempYear);
+                System.out.print(yearsList.get(0).windDirection);
+                System.out.print('\n');
             }
         }
         catch ( Exception e)
@@ -170,8 +588,11 @@ public class XMLParser {
     
     public void processWeeks(WeatherYear year) {
         
+        WeatherWeek tempWeek = new WeatherWeek(1);
+        int weekCounter = 1;
+        //System.out.print(year.days.size());
         for (int i = 0; i < year.days.size(); i++)
-        {
+        {   
             Calendar c = Calendar.getInstance();
             Date tempDate = new Date(year.year, year.days.get(i).month, (i+1) );
             c.setTime(tempDate);
@@ -180,10 +601,18 @@ public class XMLParser {
             //Set the day to have that week so we can use the week number for 
             //displaying in the GUI
 	    year.days.get(i).week = weekOfYear;
-	    //Push the day into that week
-            year.weeks.get(year.days.get(i).week).days.add(year.days.get(i));
+            if (weekCounter == weekOfYear) {
+                tempWeek.days.add(year.days.get(i));
+            }
+            if (weekCounter != weekOfYear) {
+                year.weeks.add(tempWeek);
+                tempWeek = new WeatherWeek(weekOfYear);
+                tempWeek.days.add(year.days.get(i));
+                weekCounter = weekOfYear;
+            }
             
         }
+   
         for (int i = 0; i < year.weeks.size(); i++) {
             for (int j = 0; j < year.weeks.get(i).days.size(); j++) {
                 year.weeks.get(i).meanTemp = year.weeks.get(i).days.get(j).meanTemp;
