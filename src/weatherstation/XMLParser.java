@@ -576,8 +576,8 @@ public class XMLParser {
                         tempYear.meanWindSpeed / tempYear.days.size();
                 
                 yearsList.add(tempYear);
-                System.out.print(yearsList.get(0).windDirection);
-                System.out.print('\n');
+                //System.out.print(yearsList.get(2).months.get(3).windDirection);
+                //System.out.print('\n');
             }
         }
         catch ( Exception e)
@@ -590,6 +590,24 @@ public class XMLParser {
         
         WeatherWeek tempWeek = new WeatherWeek(1);
         int weekCounter = 1;
+        int weekNCounter = 0;
+        int weekNNECounter = 0;
+        int weekNECounter = 0;
+        int weekENECounter = 0;
+        int weekECounter = 0;
+        int weekESECounter = 0;
+        int weekSECounter = 0;
+        int weekSSECounter = 0;
+        int weekSCounter = 0;
+        int weekSSWCounter = 0;
+        int weekSWCounter = 0;
+        int weekWSWCounter = 0;
+        int weekWCounter = 0;
+        int weekWNWCounter = 0;
+        int weekNWCounter = 0;
+        int weekNNWCounter = 0;
+        int weekHighest = 0;
+        
         //System.out.print(year.days.size());
         for (int i = 0; i < year.days.size(); i++)
         {   
@@ -614,7 +632,126 @@ public class XMLParser {
         }
    
         for (int i = 0; i < year.weeks.size(); i++) {
+            String weekString = "NULL";
             for (int j = 0; j < year.weeks.get(i).days.size(); j++) {
+                
+                System.out.print(year.weeks.get(i).days.get(j).windDirection);
+                
+                if("N".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekNCounter += 1;
+                    if (weekNCounter > weekHighest) {
+                        weekHighest = weekNCounter;
+                        weekString = "N";
+
+                    }
+                }
+                if("NNE".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekNNECounter += 1;
+                    if (weekNNECounter > weekHighest) {
+                        weekHighest = weekNNECounter;
+                        weekString = "NNE";
+                    }
+                }
+                if("NE".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekNECounter += 1;
+                    if (weekNECounter > weekHighest) {
+                        weekHighest = weekNECounter;
+                        weekString = "NE";
+                    }
+                }
+                if("ENE".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekENECounter += 1;
+                    if (weekENECounter > weekHighest) {
+                        weekHighest = weekENECounter;
+                        weekString = "ENE";
+                    }
+                }
+                if("E".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekECounter += 1;
+                    if (weekECounter > weekHighest) {
+                        weekHighest = weekECounter;
+                        weekString = "E";
+                    }
+                }
+                if("ESE".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekESECounter += 1;
+                    if (weekESECounter > weekHighest) {
+                        weekHighest = weekESECounter;
+                        weekString = "ESE";
+                    }
+                }
+                if("SE".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekSECounter += 1;
+                    if (weekSECounter > weekHighest) {
+                        weekHighest = weekSECounter;
+                        weekString = "SE";
+                    }
+                }
+                if("SSE".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekSSECounter += 1;
+                     if (weekSSECounter > weekHighest) {
+                        weekHighest = weekSSECounter;
+                        weekString = "SSE";
+                    }
+                }
+                if("S".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekSCounter += 1;
+                    if (weekSCounter > weekHighest) {
+                        weekHighest = weekSCounter;
+                        weekString = "S";
+                    }
+                }
+                if("SSW".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekSSWCounter += 1;
+                    if (weekSSWCounter > weekHighest) {
+                        weekHighest = weekSSWCounter;
+                        weekString = "SSW";
+                    }
+                }
+                if("SW".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekSWCounter += 1;
+                    if (weekSWCounter > weekHighest) {
+                        weekHighest = weekSWCounter;
+                        weekString = "SW";
+                    }
+                }
+                if("WSW".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekWSWCounter += 1;
+                     if (weekWSWCounter > weekHighest) {
+                        weekHighest = weekWSWCounter;
+                        weekString = "WSW";
+                    }
+                }
+                if("W".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekWCounter += 1;
+                    if (weekWCounter > weekHighest) {
+                        weekHighest = weekWCounter;
+                        weekString = "W";
+                    }
+                }
+                if("WNW".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekWNWCounter += 1;
+                    if (weekWNWCounter > weekHighest) {
+                        weekHighest = weekWNWCounter;
+                        weekString = "WNW";
+                    }
+                }
+                if("NW".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekNWCounter += 1;
+                    if (weekNWCounter > weekHighest) {
+                        weekHighest = weekNWCounter;
+                        weekString = "NW";
+                    }
+                }
+                if("NNW".equals(year.weeks.get(i).days.get(j).windDirection)) {
+                    weekNNWCounter += 1;
+                    if (weekNNWCounter > weekHighest) {
+                        weekHighest = weekNNWCounter;
+                        weekString = "NNW";
+                    }
+                }
+                
+                year.weeks.get(i).windDirection = weekString;
                 year.weeks.get(i).meanTemp = year.weeks.get(i).days.get(j).meanTemp;
                 year.weeks.get(i).meanWindSpeed = year.weeks.get(i).days.get(j).meanWindSpeed;
                 year.weeks.get(i).totalRainfall = year.weeks.get(i).days.get(j).totalRainfall;
