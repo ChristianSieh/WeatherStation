@@ -474,6 +474,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         renderer.setSeriesVisible(5, false);
         renderer.setSeriesVisible(6, false);
         renderer.setSeriesVisible(7, false);
+        renderer.setSeriesVisible(8, false);
         plotPanel.repaint();
     }
 

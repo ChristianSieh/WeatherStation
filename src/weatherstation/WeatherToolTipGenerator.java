@@ -30,6 +30,7 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
         + "Wind Chill: " + form.format(xyDataset.getYValue(4, item)) + "<br>"
         + "Heat Index: " + form.format(xyDataset.getYValue(5, item)) + "<br>"
         + "UV Index: " + form.format(xyDataset.getYValue(6, item)) + "<br>"
-        + "Rainfall: " + form.format(xyDataset.getYValue(7, item)) + "</html>");
+        + "Rainfall: " + form.format(xyDataset.getYValue(7, item)) + "<br>"
+        + "Wind Gust: " + form.format(xyDataset.getYValue(8, item)) + "</html>");
     }
 }

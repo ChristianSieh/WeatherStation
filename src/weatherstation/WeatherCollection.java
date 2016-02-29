@@ -25,7 +25,7 @@ public class WeatherCollection extends TimeSeriesCollection
     private TimeSeries heatIndexSeries;
     private TimeSeries uvIndexSeries;
     private TimeSeries rainfallSeries;
-    //private TimeSeries windGustSeries;
+    private TimeSeries windGustSeries;
     
     public WeatherCollection()
     {
@@ -37,7 +37,7 @@ public class WeatherCollection extends TimeSeriesCollection
         heatIndexSeries = new TimeSeries("HeatIndex");
         uvIndexSeries = new TimeSeries("UVIndex");
         rainfallSeries = new TimeSeries("Rainfall");
-        //windGustSeries = new TimeSeries("WindGust");
+        windGustSeries = new TimeSeries("WindGust");
     }
     
     public void updateSeries(ArrayList<WeatherYear> yearsList,
@@ -51,6 +51,7 @@ public class WeatherCollection extends TimeSeriesCollection
         heatIndexSeries.clear();
         uvIndexSeries.clear();
         rainfallSeries.clear();
+        windGustSeries.clear();
         
         if(display == "Year")
         {
@@ -70,6 +71,7 @@ public class WeatherCollection extends TimeSeriesCollection
                     heatIndexSeries.add(minuteType, tempData.heatIndex);
                     uvIndexSeries.add(minuteType, tempData.uvIndex);
                     rainfallSeries.add(minuteType, tempData.rainfall);
+                    windGustSeries.add(minuteType, tempData.windGust);
                 }
             }
         }
@@ -93,6 +95,7 @@ public class WeatherCollection extends TimeSeriesCollection
                     heatIndexSeries.add(minuteType, tempData.heatIndex);
                     uvIndexSeries.add(minuteType, tempData.uvIndex);
                     rainfallSeries.add(minuteType, tempData.rainfall);
+                    windGustSeries.add(minuteType, tempData.windGust);
                 }
             }
         }
@@ -123,6 +126,7 @@ public class WeatherCollection extends TimeSeriesCollection
                     heatIndexSeries.add(minuteType, tempData.heatIndex);
                     uvIndexSeries.add(minuteType, tempData.uvIndex);
                     rainfallSeries.add(minuteType, tempData.rainfall);
+                    windGustSeries.add(minuteType, tempData.windGust);
                 }
             }
         }
@@ -143,6 +147,7 @@ public class WeatherCollection extends TimeSeriesCollection
                 heatIndexSeries.add(minuteType, tempData.heatIndex);
                 uvIndexSeries.add(minuteType, tempData.uvIndex);
                 rainfallSeries.add(minuteType, tempData.rainfall);
+                windGustSeries.add(minuteType, tempData.windGust);
             }
         }
         
@@ -155,6 +160,7 @@ public class WeatherCollection extends TimeSeriesCollection
         addSeries(heatIndexSeries);
         addSeries(uvIndexSeries);
         addSeries(rainfallSeries);
+        addSeries(windGustSeries);
     }
     
     public void addSeries(String label)
