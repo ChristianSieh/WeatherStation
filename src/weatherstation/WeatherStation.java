@@ -15,7 +15,6 @@ public class WeatherStation {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        WeatherFrame wFrame = new WeatherFrame();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new WeatherFrame().setVisible(true);

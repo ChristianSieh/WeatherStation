@@ -25,6 +25,42 @@ import org.jfree.data.xy.XYDataset;
  */
 public class WeatherFrame extends javax.swing.JFrame {
 
+    private JToggleButton BarometricPressureBtn;
+    private JPanel ButtonPanel;
+    private JMenu FileMenu;
+    private JPanel GuagesPanel;
+    private JToggleButton HeatIndexBtn;
+    private JToggleButton HumidityBtn;
+    private JMenuBar MenuBar;
+    private JMenuItem OpenMenuItem;
+    private JToggleButton RainfallBtn;
+    private JLabel TempGuagelabel;
+    private JToggleButton TemperatureBtn;
+    private JToggleButton UVIndexBtn;
+    private JToggleButton WindChillBtn;
+    private JToggleButton WindSpeedBtn;
+    private JFileChooser fileChooser;
+    private JLabel YearLabel;
+    private JLabel MonthLabel;
+    private JLabel DisplayLabel;
+    private JLabel DayLabel;
+    private JComboBox<Integer> dayComboBox;
+    private JComboBox<String> monthComboBox;
+    private JComboBox<Integer> displayComboBox;
+    private JComboBox<Integer> yearComboBox;
+    private ChartPanel plotPanel;
+    private JFreeChart plotChart;
+    private XYPlot plot;
+    private XYItemRenderer renderer;
+    private ArrayList list;
+    private XYDataset dataset;
+    private WeatherCollection collection;
+    private XMLParser xmlParser;
+    private ArrayList<WeatherYear> yearsList;
+    private ArrayList<String> monthList;
+    private boolean filled;
+    private JButton SubmitBtn;
+    
     /**
      * Creates new form WeatherFrame
      */
@@ -33,7 +69,6 @@ public class WeatherFrame extends javax.swing.JFrame {
     }
     
     private void initComponents() {
-
         fileChooser = new JFileChooser();
         xmlParser = new XMLParser();
         dayComboBox = new JComboBox<Integer>();
@@ -511,40 +546,4 @@ public class WeatherFrame extends javax.swing.JFrame {
             dayComboBox.addItem(i + 1);
         }
     }
-
-    private JToggleButton BarometricPressureBtn;
-    private JPanel ButtonPanel;
-    private JMenu FileMenu;
-    private JPanel GuagesPanel;
-    private JToggleButton HeatIndexBtn;
-    private JToggleButton HumidityBtn;
-    private JMenuBar MenuBar;
-    private JMenuItem OpenMenuItem;
-    private JToggleButton RainfallBtn;
-    private JLabel TempGuagelabel;
-    private JToggleButton TemperatureBtn;
-    private JToggleButton UVIndexBtn;
-    private JToggleButton WindChillBtn;
-    private JToggleButton WindSpeedBtn;
-    private JFileChooser fileChooser;
-    private JLabel YearLabel;
-    private JLabel MonthLabel;
-    private JLabel DisplayLabel;
-    private JLabel DayLabel;
-    private JComboBox<Integer> dayComboBox;
-    private JComboBox<String> monthComboBox;
-    private JComboBox<Integer> displayComboBox;
-    private JComboBox<Integer> yearComboBox;
-    private ChartPanel plotPanel;
-    private JFreeChart plotChart;
-    private XYPlot plot;
-    private XYItemRenderer renderer;
-    private ArrayList list;
-    private XYDataset dataset;
-    private WeatherCollection collection;
-    private XMLParser xmlParser;
-    private ArrayList<WeatherYear> yearsList;
-    private ArrayList<String> monthList;
-    private boolean filled;
-    private JButton SubmitBtn;
 }

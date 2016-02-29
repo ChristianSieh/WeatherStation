@@ -20,9 +20,8 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
     {
         DecimalFormat form = new DecimalFormat("00.0");
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm");
-        Number x = xyDataset.getX(series, item);
-        String seperator = System.lineSeparator();
-        return ("<html>" + sdf.format(x) + "<br>"
+        Number time = xyDataset.getX(series, item);
+        return ("<html>" + sdf.format(time) + "<br>"
         + " Temperature: " + form.format(xyDataset.getYValue(0, item)) + "<br>"
         + "Humidity: " + form.format(xyDataset.getYValue(1, item)) + "<br>"
         + "Barometric Pressure: " + form.format(xyDataset.getYValue(2, item)) + "<br>"

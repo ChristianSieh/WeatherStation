@@ -6,7 +6,6 @@
 package weatherstation;
 
 import java.util.ArrayList;
-import org.jfree.data.ComparableObjectSeries;
 import org.jfree.data.time.Minute;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -26,6 +25,7 @@ public class WeatherCollection extends TimeSeriesCollection
     private TimeSeries uvIndexSeries;
     private TimeSeries rainfallSeries;
     private TimeSeries windGustSeries;
+    //private TimeSeries windDirectionSeries;
     
     public WeatherCollection()
     {
@@ -38,6 +38,7 @@ public class WeatherCollection extends TimeSeriesCollection
         uvIndexSeries = new TimeSeries("UVIndex");
         rainfallSeries = new TimeSeries("Rainfall");
         windGustSeries = new TimeSeries("WindGust");
+        //windDirectionSeries = new TimeSeries("WindDirection");
     }
     
     public void updateSeries(ArrayList<WeatherYear> yearsList,
@@ -52,6 +53,7 @@ public class WeatherCollection extends TimeSeriesCollection
         uvIndexSeries.clear();
         rainfallSeries.clear();
         windGustSeries.clear();
+        //windDirectionSeries.clear();
         
         if(display == "Year")
         {
@@ -72,6 +74,7 @@ public class WeatherCollection extends TimeSeriesCollection
                     uvIndexSeries.add(minuteType, tempData.uvIndex);
                     rainfallSeries.add(minuteType, tempData.rainfall);
                     windGustSeries.add(minuteType, tempData.windGust);
+                    //windDirectionSeries.add(minuteType, tempData.windDirection);
                 }
             }
         }
@@ -96,6 +99,7 @@ public class WeatherCollection extends TimeSeriesCollection
                     uvIndexSeries.add(minuteType, tempData.uvIndex);
                     rainfallSeries.add(minuteType, tempData.rainfall);
                     windGustSeries.add(minuteType, tempData.windGust);
+                    //windDirectionSeries.add(minuteType, tempData.windDirection);
                 }
             }
         }
@@ -127,6 +131,7 @@ public class WeatherCollection extends TimeSeriesCollection
                     uvIndexSeries.add(minuteType, tempData.uvIndex);
                     rainfallSeries.add(minuteType, tempData.rainfall);
                     windGustSeries.add(minuteType, tempData.windGust);
+                    //windDirectionSeries.add(minuteType, tempData.windDirection);
                 }
             }
         }
@@ -148,6 +153,7 @@ public class WeatherCollection extends TimeSeriesCollection
                 uvIndexSeries.add(minuteType, tempData.uvIndex);
                 rainfallSeries.add(minuteType, tempData.rainfall);
                 windGustSeries.add(minuteType, tempData.windGust);
+                //windDirectionSeries.add(minuteType, tempData.windDirection);
             }
         }
         
@@ -161,51 +167,7 @@ public class WeatherCollection extends TimeSeriesCollection
         addSeries(uvIndexSeries);
         addSeries(rainfallSeries);
         addSeries(windGustSeries);
-    }
-    
-    public void addSeries(String label)
-    {
-        Series temp = Series.valueOf(label);
-        
-        switch (temp) {
-            case Temperature:
-                addSeries(temperatureSeries);
-                break;
-            
-            case Humidity:
-                addSeries(humiditySeries);
-                break;
-                
-            case BarometricPressure:
-                addSeries(barometricSeries);
-                break;
-                
-            case WindSpeed:
-                addSeries(windSpeedSeries);
-                break;
-                
-            case WindChill:
-                addSeries(windChillSeries);
-                break;
-                
-            case HeatIndex:
-                addSeries(heatIndexSeries);
-                break;
-                
-            case UVIndex:
-                addSeries(uvIndexSeries);
-                break;
-                
-            case Rainfall:
-                addSeries(rainfallSeries);
-                break;
-        }
-    }
-    
-    public void removeSeries(String label)
-    {
-        int index = getSeriesIndex(label);
-        removeSeries(index);
+        //addSeries(windDirectionSeries);
     }
     
     private enum Series{
