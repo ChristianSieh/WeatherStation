@@ -16,6 +16,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -39,6 +40,8 @@ public class WeatherFrame extends javax.swing.JFrame {
         plotChart = createChart();
         collection = new WeatherCollection();
         plotPanel = new ChartPanel(plotChart);
+        plot = plotChart.getXYPlot();
+        renderer = plot.getRenderer();
         ButtonPanel = new JPanel();
         TemperatureBtn = new JToggleButton();
         HumidityBtn = new JToggleButton();
@@ -362,73 +365,73 @@ public class WeatherFrame extends javax.swing.JFrame {
     private void TemperatureBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("Temperature");
+            renderer.setSeriesVisible(0, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("Temperature");
+            renderer.setSeriesVisible(0, false);
     }
     
     private void HumidityBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("Humidity");
+            renderer.setSeriesVisible(1, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("Humidity");
+            renderer.setSeriesVisible(1, false);
     }
     
     private void BarometricPressureBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("BarometricPressure");
+            renderer.setSeriesVisible(2, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("BarometricPressure");
+            renderer.setSeriesVisible(2, false);
     }
     
     private void WindSpeedBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("WindSpeed");
+            renderer.setSeriesVisible(3, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("WindSpeed");
+            renderer.setSeriesVisible(3, false);
     }
     
     private void WindChillBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("WindChill");
+            renderer.setSeriesVisible(4, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("WindChill");
+            renderer.setSeriesVisible(4, false);
     }
 
     private void HeatIndexBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("HeatIndex");
+            renderer.setSeriesVisible(5, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("HeatIndex");
+            renderer.setSeriesVisible(5, false);
     }
     
     private void UVIndexBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("UVIndex");
+            renderer.setSeriesVisible(6, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("UVIndex");
+            renderer.setSeriesVisible(6, false);
     }
     
     private void RainfallBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
-            addSeries("Rainfall");
+            renderer.setSeriesVisible(7, true);
         }
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
-            removeSeries("Rainfall");
+            renderer.setSeriesVisible(7, false);
     }
 
     private void FileMenuActionPerformed(java.awt.event.ActionEvent evt) {
@@ -449,17 +452,6 @@ public class WeatherFrame extends javax.swing.JFrame {
                 dayComboBox.getSelectedIndex(), displayComboBox.getSelectedItem().toString());
         updateDataset();
     }
-    private void addSeries(String label)
-    {           
-        collection.addSeries(label);
-        updateDataset();
-    }
-    
-    private void removeSeries(String label)
-    {
-        collection.removeSeries(label);
-        updateDataset();
-    }
     
     private void updateDataset()
     {
@@ -469,9 +461,19 @@ public class WeatherFrame extends javax.swing.JFrame {
     
     private void updateChart()
     {    
-        XYPlot plot = plotChart.getXYPlot();
         plot.setDataset(dataset);
+        XYItemRenderer xyItemRenderer = plot.getRenderer();
+        WeatherToolTipGenerator weatherToolTipGenerator = new WeatherToolTipGenerator();
+        xyItemRenderer.setToolTipGenerator(weatherToolTipGenerator);
         plotPanel.setChart(plotChart);
+        renderer.setSeriesVisible(0, false);
+        renderer.setSeriesVisible(1, false);
+        renderer.setSeriesVisible(2, false);
+        renderer.setSeriesVisible(3, false);
+        renderer.setSeriesVisible(4, false);
+        renderer.setSeriesVisible(5, false);
+        renderer.setSeriesVisible(6, false);
+        renderer.setSeriesVisible(7, false);
         plotPanel.repaint();
     }
 
@@ -569,6 +571,8 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JComboBox<Integer> yearComboBox;
     private ChartPanel plotPanel;
     private JFreeChart plotChart;
+    private XYPlot plot;
+    private XYItemRenderer renderer;
     private ArrayList list;
     private XYDataset dataset;
     private WeatherCollection collection;

@@ -6,6 +6,7 @@
 package weatherstation;
 
 import java.util.ArrayList;
+import org.jfree.data.ComparableObjectSeries;
 import org.jfree.data.time.Minute;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -24,6 +25,7 @@ public class WeatherCollection extends TimeSeriesCollection
     private TimeSeries heatIndexSeries;
     private TimeSeries uvIndexSeries;
     private TimeSeries rainfallSeries;
+    //private TimeSeries windGustSeries;
     
     public WeatherCollection()
     {
@@ -35,6 +37,7 @@ public class WeatherCollection extends TimeSeriesCollection
         heatIndexSeries = new TimeSeries("HeatIndex");
         uvIndexSeries = new TimeSeries("UVIndex");
         rainfallSeries = new TimeSeries("Rainfall");
+        //windGustSeries = new TimeSeries("WindGust");
     }
     
     public void updateSeries(ArrayList<WeatherYear> yearsList,
@@ -142,6 +145,16 @@ public class WeatherCollection extends TimeSeriesCollection
                 rainfallSeries.add(minuteType, tempData.rainfall);
             }
         }
+        
+        removeAllSeries();
+        addSeries(temperatureSeries);
+        addSeries(humiditySeries);
+        addSeries(barometricSeries);
+        addSeries(windSpeedSeries);
+        addSeries(windChillSeries);
+        addSeries(heatIndexSeries);
+        addSeries(uvIndexSeries);
+        addSeries(rainfallSeries);
     }
     
     public void addSeries(String label)
@@ -198,5 +211,24 @@ public class WeatherCollection extends TimeSeriesCollection
         HeatIndex,
         UVIndex,
         Rainfall
+    }
+    
+    private enum Direction{
+        N,
+        NNE,
+        NE,
+        ENE,
+        E,
+        ESE,
+        SE,
+        SSE,
+        S,
+        SSW,
+        SW,
+        WSW,
+        W,
+        WNW,
+        NW,
+        NNW
     }
 }
