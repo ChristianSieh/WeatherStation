@@ -37,4 +37,23 @@ public class WeatherYear {
         weeks = new ArrayList<WeatherWeek>(53);
         days = new ArrayList<WeatherDay>();
     }
+    
+    public enum windDirection{
+        N,
+        NNE,
+        NE,
+        ENE,
+        E,
+        ESE,
+        SE,
+        SSE,
+        S,
+        SSW,
+        SW,
+        WSW,
+        W,
+        WNW,
+        NW,
+        NNW
+    }
 }

@@ -113,7 +113,6 @@ public class XMLParser {
                         int dayHighest = 0;
                         boolean XMLFlag = true;
                         
-
                         //List<Element> weatherList = root.getChildren(); // old spot
                         //System.out.print(root.getChildren().size());
                         while ( XMLFlag == true) // probably 95
@@ -136,20 +135,16 @@ public class XMLParser {
                             catch (java.lang.IndexOutOfBoundsException err)
                             {
                                 break;
-                            }
-                            
-                            
+                            }  
                         }
                         
-
                         for (int k = 0; k < tempDay.data.size(); k++) {
                             
                             if("N".equals(tempDay.data.get(k).windDirection)) {
                                 dayNCounter += 1;
                                 if (dayNCounter > dayHighest) {
                                     dayHighest = dayNCounter;
-                                    dayString = "N";
-                                    
+                                    dayString = "N";  
                                 }
                             }
                             if("NNE".equals(tempDay.data.get(k).windDirection)) {
@@ -267,28 +262,21 @@ public class XMLParser {
                             
                             tempYear.totalRainfall = tempYear.totalRainfall + tempDay.data.get(k).rainfall;
                             
-                            
                             if(tempDay.highTemp < tempDay.data.get(k).temperature) {
                                 tempDay.highTemp = tempDay.data.get(k).temperature;
                                 tempDay.highDate = tempDay.data.get(k).date;
                                 tempDay.highTime = tempDay.data.get(k).time;
-                               
                             }
                             if(tempMonth.highTemp < tempDay.data.get(k).temperature){
                                 tempMonth.highTemp = tempDay.data.get(k).temperature;
                                 tempMonth.highDate = tempDay.data.get(k).date;
                                 tempMonth.highTime = tempDay.data.get(k).time;
-                                
-                            
-                               
                             }
                             if(tempYear.highTemp < tempDay.data.get(k).temperature){
                                 tempYear.highTemp = tempDay.data.get(k).temperature;
                                 tempYear.highDate = tempDay.data.get(k).date;
                                 tempYear.highTime = tempDay.data.get(k).time;
-
-                            }
-                            
+                            }                            
                             if(tempDay.lowTemp > tempDay.data.get(k).temperature){
                                 tempDay.lowTemp = tempDay.data.get(k).temperature;
                                 tempDay.lowDate = tempDay.data.get(k).date;
@@ -303,8 +291,7 @@ public class XMLParser {
                                 tempYear.lowTemp = tempDay.data.get(k).temperature;
                                 tempYear.lowDate = tempDay.data.get(k).date;
                                 tempYear.lowTime = tempDay.data.get(k).time;
-                            }
-                            
+                            }                            
                             if(tempDay.maxWindSpeed < tempDay.data.get(k).windSpeed){
                                 tempDay.maxWindSpeed = tempDay.data.get(k).windSpeed;
                                 tempDay.windSpeedDate = tempDay.data.get(k).date;
@@ -319,15 +306,11 @@ public class XMLParser {
                                 tempYear.maxWindSpeed = tempDay.data.get(k).windSpeed;
                                 tempYear.windSpeedDate = tempDay.data.get(k).date;
                                 tempYear.windSpeedTime = tempDay.data.get(k).time;
-                            }
-                            
-                            
-                            
+                            }                          
                         }
                         
                         tempDay.windDirection = dayString; 
-                       
-                        
+                                               
                         tempDay.meanTemp = 
                                 tempDay.meanTemp / tempDay.data.size();
                         tempDay.meanWindSpeed = 
@@ -339,16 +322,13 @@ public class XMLParser {
                         tempYear.meanTemp = tempYear.meanTemp + tempDay.meanTemp;
                         tempYear.meanWindSpeed = tempYear.meanWindSpeed + tempDay.meanWindSpeed;
                         
-
-                        
                          if("N".equals(tempDay.windDirection)) {
-                                monthNCounter += 1;
-                                if (monthNCounter > monthHighest) {
-                                    monthHighest = monthNCounter;
-                                    monthString = "N";
-                                    
-                                }
+                            monthNCounter += 1;
+                            if (monthNCounter > monthHighest) {
+                                monthHighest = monthNCounter;
+                                monthString = "N";
                             }
+                        }
                         if("NNE".equals(tempDay.windDirection)) {
                             monthNNECounter += 1;
                             if (monthNNECounter > monthHighest) {
@@ -454,11 +434,9 @@ public class XMLParser {
                                 monthString = "NNW";
                             }
                         }
-                        
-                        
+                                                
                         tempMonth.days.add(tempDay);
-                        tempYear.days.add(tempDay);
-                         
+                        tempYear.days.add(tempDay);                         
                     }
                     
                     if(fileIndex < directory.listFiles().length)
@@ -468,7 +446,6 @@ public class XMLParser {
                                 tempMonth.meanTemp / tempMonth.days.size();
                         tempMonth.meanWindSpeed = 
                                 tempMonth.meanWindSpeed / tempMonth.days.size();
-
                         
                         tempYear.months.add(tempMonth);
                         
@@ -590,11 +567,8 @@ public class XMLParser {
                         fileIndex++;
                         document = builder.build(file);
                         root = document.getRootElement();
-                    }
-                    
-                    
+                    }   
                 }
-
                 processWeeks(tempYear);
                 
                 tempYear.windDirection = yearString;
@@ -602,8 +576,7 @@ public class XMLParser {
                 tempYear.meanWindSpeed = 
                         tempYear.meanWindSpeed / tempYear.days.size();
                 
-                yearsList.add(tempYear);
-                
+                yearsList.add(tempYear);                
             }
         }
         catch ( Exception e)
@@ -633,15 +606,16 @@ public class XMLParser {
         int weekNWCounter = 0;
         int weekNNWCounter = 0;
         int weekHighest = 0;
-        
-        
+                
         for (int i = 0; i < year.days.size(); i++)
         {   
             Calendar c = Calendar.getInstance();
             Date tempDate = new Date(year.year, year.days.get(i).month, (i+1) );
             c.setTime(tempDate);
+            
             //Gets which week this day belongs to for that year
             int weekOfYear = c.get(Calendar.WEEK_OF_YEAR);
+            
             //Set the day to have that week so we can use the week number for 
             //displaying in the GUI
 	    year.days.get(i).week = weekOfYear;
@@ -666,7 +640,6 @@ public class XMLParser {
                     if (weekNCounter > weekHighest) {
                         weekHighest = weekNCounter;
                         weekString = "N";
-
                     }
                 }
                 if("NNE".equals(year.weeks.get(i).days.get(j).windDirection)) {

@@ -19,7 +19,7 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
     public String generateToolTip(XYDataset xyDataset, int series, int item)
     {
         DecimalFormat form = new DecimalFormat("00.0");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm");
         Number x = xyDataset.getX(series, item);
         String seperator = System.lineSeparator();
         return ("<html>" + sdf.format(x) + "<br>"

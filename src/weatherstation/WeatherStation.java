@@ -16,8 +16,11 @@ public class WeatherStation {
      */
     public static void main(String[] args) {
         WeatherFrame wFrame = new WeatherFrame();
-        wFrame.setVisible(true);
-        //ChartPanel test = new ChartPanel();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new WeatherFrame().setVisible(true);
+            }
+        });
     }
     
 }
