@@ -142,44 +142,44 @@ public class WeatherFrame extends javax.swing.JFrame {
         }};
         filled = false;
         SubmitBtn = new JButton("Submit");
-        averageTempLabel = new JLabel("Avg. Temp");
+        averageTempLabel = new JLabel("    Avg. Temp");
         averageTemp = new JTextField();
         
         highTemp = new JTextField();
-        highTempLabel = new JLabel("High Temp");
+        highTempLabel = new JLabel("    High Temp");
         
         highTempDate = new JTextField();
-        highTempDateLabel = new JLabel("High Temp Date");
+        highTempDateLabel = new JLabel("    High Temp Date");
         
         highTempTime = new JTextField();
-        highTempTimeLabel = new JLabel("High Temp Time");
+        highTempTimeLabel = new JLabel("    High Temp Time");
         
         lowTemp = new JTextField();
-        lowTempLabel = new JLabel("Low Temp");
+        lowTempLabel = new JLabel("   Low Temp");
         
         lowTempDate = new JTextField();
-        lowTempDateLabel = new JLabel("Low Temp Date");
+        lowTempDateLabel = new JLabel("    Low Temp Date");
         
         lowTempTime = new JTextField();
-        lowTempTimeLabel = new JLabel("Low Temp Time");
+        lowTempTimeLabel = new JLabel("    Low Temp Time");
         
         averageWindSpeed = new JTextField();
-        averageWindSpeedLabel = new JLabel("Avg. Wind Speed");
+        averageWindSpeedLabel = new JLabel("    Avg. Wind Speed");
         
         maxWindSpeed = new JTextField();
-        maxWindSpeedLabel = new JLabel("Max Wind Speed");
+        maxWindSpeedLabel = new JLabel("    Max Wind Speed");
         
         windSpeedDate = new JTextField();
-        windSpeedDateLabel = new JLabel("Max Wind Date");
+        windSpeedDateLabel = new JLabel("    Max Wind Date");
         
         windSpeedTime = new JTextField();
-        windSpeedTimeLabel = new JLabel("Max Wind Time");
+        windSpeedTimeLabel = new JLabel("    Max Wind Time");
         
         prevailWindDirection = new JTextField();
-        prevailWindDirectionLabel = new JLabel("Prevailing Wind Dir.");
+        prevailWindDirectionLabel = new JLabel("    Prevailing Wind Dir.");
         
         totalRainfall = new JTextField();
-        totalRainfallLabel = new JLabel("Total Rainfall");
+        totalRainfallLabel = new JLabel("    Total Rainfall");
 
         //fileChooser.setFileFilter(new xmlFilter());
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -309,6 +309,24 @@ public class WeatherFrame extends javax.swing.JFrame {
         GuagesPanel.add(highTempDate);
         GuagesPanel.add(highTempTimeLabel);
         GuagesPanel.add(highTempTime);
+        GuagesPanel.add(lowTempLabel);
+        GuagesPanel.add(lowTemp);
+        GuagesPanel.add(lowTempDateLabel);
+        GuagesPanel.add(lowTempDate);
+        GuagesPanel.add(lowTempTimeLabel);
+        GuagesPanel.add(lowTempTime);
+        GuagesPanel.add(averageWindSpeedLabel);
+        GuagesPanel.add(averageWindSpeed);
+        GuagesPanel.add(maxWindSpeedLabel);
+        GuagesPanel.add(maxWindSpeed);
+        GuagesPanel.add(windSpeedDateLabel);
+        GuagesPanel.add(windSpeedDate);
+        GuagesPanel.add(windSpeedTimeLabel);
+        GuagesPanel.add(windSpeedTime);
+        GuagesPanel.add(prevailWindDirectionLabel);
+        GuagesPanel.add(prevailWindDirection);
+        GuagesPanel.add(totalRainfallLabel);
+        GuagesPanel.add(totalRainfall);
         
        /* javax.swing.GroupLayout GuagesPanelLayout = new GroupLayout(GuagesPanel);
         GuagesPanel.setLayout(GuagesPanelLayout);
@@ -565,6 +583,217 @@ public class WeatherFrame extends javax.swing.JFrame {
                 monthComboBox.getSelectedIndex(), 
                 dayComboBox.getSelectedIndex(), displayComboBox.getSelectedItem().toString());
         updateDataset();
+        getData();
+    }
+    
+    private void getData() {
+        
+        if ("Year".equals(displayComboBox.getSelectedItem().toString())) {
+           averageTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).meanTemp));
+           
+           highTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).highTemp));
+           
+           highTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .highDate);
+           
+           highTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .highTime);
+           
+           lowTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).lowTemp));
+           
+           lowTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .lowDate);
+           
+           lowTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .lowTime);
+           
+           averageWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).meanWindSpeed));
+           
+           maxWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).maxWindSpeed));
+           
+           windSpeedDate.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .windSpeedDate);
+           
+           windSpeedTime.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .windSpeedTime);
+           
+           prevailWindDirection.setText(yearsList.get(yearComboBox.
+                   getSelectedIndex()).windDirection);
+           
+           totalRainfall.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).totalRainfall));
+           
+        }
+        
+         if ("Month".equals(displayComboBox.getSelectedItem().toString())) {
+           averageTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.
+                           getSelectedIndex()).meanTemp));
+           
+           highTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.
+                           getSelectedIndex()).highTemp));
+           
+           highTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).highDate);
+           
+           highTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).highTime);
+           
+           lowTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.
+                           getSelectedIndex()).lowTemp));
+           
+           lowTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).lowDate);
+           
+           lowTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).lowTime);
+           
+           averageWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.
+                           getSelectedIndex()).meanWindSpeed));
+           
+           maxWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.
+                           getSelectedIndex()).maxWindSpeed));
+           
+           windSpeedDate.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).windSpeedDate);
+           
+           windSpeedTime.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).windSpeedTime);
+           
+           prevailWindDirection.setText(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.
+                           getSelectedIndex()).windDirection);
+           
+           totalRainfall.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.
+                           getSelectedIndex()).totalRainfall));
+           
+        }
+        
+         if ("Week".equals(displayComboBox.getSelectedItem().toString())) {
+           int weekIndex = yearsList.get(yearComboBox.getSelectedIndex())
+                   .months.get(monthComboBox.getSelectedIndex()).days.
+                   get(dayComboBox.getSelectedIndex()).week;
+           
+           averageTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).weeks.get(weekIndex).meanTemp));
+           
+           highTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).weeks.get(weekIndex).highTemp));
+           
+           highTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   weeks.get(weekIndex).highDate);
+           
+           highTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   weeks.get(weekIndex).highTime);
+           
+           lowTemp.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).weeks.get(weekIndex).lowTemp));
+           
+           lowTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   weeks.get(weekIndex).lowDate);
+           
+           lowTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   weeks.get(weekIndex).lowTime);
+           
+           averageWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).weeks.get(weekIndex).meanWindSpeed));
+           
+           maxWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).weeks.get(weekIndex).maxWindSpeed));
+           
+           windSpeedDate.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   weeks.get(weekIndex).windSpeedDate);
+           
+           windSpeedTime.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   weeks.get(weekIndex).windSpeedTime);
+           
+           prevailWindDirection.setText(yearsList.get(yearComboBox.
+                   getSelectedIndex()).weeks.get(weekIndex).windDirection);
+           
+           totalRainfall.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).weeks.get(weekIndex).totalRainfall));
+           
+        }
+         
+         if ("Day".equals(displayComboBox.getSelectedItem().toString())) {
+           averageTemp.setText(String.valueOf(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).days.get(dayComboBox.getSelectedIndex()).meanTemp));
+           
+           highTemp.setText(String.valueOf(yearsList.get(yearComboBox.getSelectedIndex())
+                   .months.get(monthComboBox.getSelectedIndex())
+                   .days.get(dayComboBox.getSelectedIndex()).highTemp));
+           
+           highTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .months.get(monthComboBox.getSelectedIndex()).days
+                   .get(dayComboBox.getSelectedIndex()).highDate);
+           
+           highTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .months.get(monthComboBox.getSelectedIndex()).days.
+                   get(dayComboBox.getSelectedIndex()).highTime);
+           
+           lowTemp.setText(String.valueOf(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).days.
+                   get(dayComboBox.getSelectedIndex()).lowTemp));
+           
+           lowTempDate.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .months.get(monthComboBox.getSelectedIndex()).days.
+                   get(dayComboBox.getSelectedIndex()).lowDate);
+           
+           lowTempTime.setText(yearsList.get(yearComboBox.getSelectedIndex())
+                   .months.get(monthComboBox.getSelectedIndex()).days.
+                   get(dayComboBox.getSelectedIndex()).lowTime);
+           
+           averageWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.getSelectedIndex())
+                   .days.get(dayComboBox.getSelectedIndex()).meanWindSpeed));
+           
+           maxWindSpeed.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.getSelectedIndex())
+                   .days.get(dayComboBox.getSelectedIndex()).maxWindSpeed));
+           
+           windSpeedDate.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).days.
+                   get(dayComboBox.getSelectedIndex()).windSpeedDate);
+           
+           windSpeedTime.setText(yearsList.get(yearComboBox.getSelectedIndex()).
+                   months.get(monthComboBox.getSelectedIndex()).days.
+                   get(dayComboBox.getSelectedIndex()).windSpeedTime);
+           
+           prevailWindDirection.setText(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.getSelectedIndex())
+                   .days.get(dayComboBox.getSelectedIndex()).windDirection);
+           
+           totalRainfall.setText(String.valueOf(yearsList.get(yearComboBox.
+                   getSelectedIndex()).months.get(monthComboBox.getSelectedIndex())
+                   .days.get(dayComboBox.getSelectedIndex()).totalRainfall));
+           
+        }
+        averageTemp.setEditable(false);
+        highTemp.setEditable(false); 
+        highTempDate.setEditable(false); 
+        highTempTime.setEditable(false); 
+        lowTemp.setEditable(false); 
+        lowTempDate.setEditable(false);
+        lowTempTime.setEditable(false);
+        averageWindSpeed.setEditable(false);
+        maxWindSpeed.setEditable(false);
+        windSpeedDate.setEditable(false);
+        windSpeedTime.setEditable(false);
+        prevailWindDirection.setEditable(false);
+        totalRainfall.setEditable(false);
+        
+        
+        
     }
     
     private void updateDataset()
