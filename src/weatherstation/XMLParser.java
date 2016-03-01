@@ -93,7 +93,7 @@ public class XMLParser {
                     
                     String dayString = "NULL";
                     int dayWindDirectionValue = -1;
-                    List<Element> weatherList = root.getChildren(); // new spot
+                    List<Element> weatherList = root.getChildren();
                     int XMLDayCounter = 0;
                     for(int dayIndex = 0; dayIndex < daysInMonth; dayIndex++)
                     {
@@ -119,8 +119,6 @@ public class XMLParser {
                         int dayHighest = 0;
                         boolean XMLFlag = true;
                         
-                        //List<Element> weatherList = root.getChildren(); // old spot
-                        //System.out.print(root.getChildren().size());
                         while ( XMLFlag == true) // probably 95
                         {
                             try {
