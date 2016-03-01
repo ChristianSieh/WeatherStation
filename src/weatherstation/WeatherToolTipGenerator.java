@@ -25,7 +25,7 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
         DecimalFormat form = new DecimalFormat("00.0");
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm");
         Number time = xyDataset.getX(series, item);
-        windDirection = checkWindDirection(form.format(xyDataset.getYValue(9, item)));
+        //windDirection = checkWindDirection(form.format(xyDataset.getYValue(9, item)));
         
         return ("<html>" + sdf.format(time) + "<br>"
         + " Temperature: " + form.format(xyDataset.getYValue(0, item)) + "<br>"
@@ -36,8 +36,8 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
         + "Heat Index: " + form.format(xyDataset.getYValue(5, item)) + "<br>"
         + "UV Index: " + form.format(xyDataset.getYValue(6, item)) + "<br>"
         + "Rainfall: " + form.format(xyDataset.getYValue(7, item)) + "<br>"
-        + "Wind Direction " + windDirection + "<br>" 
-        + "Wind Gust: " + form.format(xyDataset.getYValue(8, item)) + "</html>");
+        + "Wind Gust: " + form.format(xyDataset.getYValue(8, item)) + "<br>"
+        + "Wind Direction: " + form.format(xyDataset.getYValue(9,item)) + "</html>");
     }
     
     public String checkWindDirection(String windvalue) {

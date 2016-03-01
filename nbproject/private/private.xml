@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/weatherstation/WeatherToolTipGenerator.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>24</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherToolTipGenerator.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherYear.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherCollection.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WindDirection.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherMonth.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/XMLParser.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherStation.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherFrame.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherWeek.java</file>
-            <file>file:/C:/Users/7110002/Documents/GitHub/WeatherStation/src/weatherstation/WeatherDay.java</file>
+            <file>file:/home/student/1960681/csc468/WeatherStation/src/weatherstation/WeatherFrame.java</file>
+            <file>file:/home/student/1960681/csc468/WeatherStation/src/weatherstation/WeatherData.java</file>
+            <file>file:/home/student/1960681/csc468/WeatherStation/src/weatherstation/WeatherStation.java</file>
+            <file>file:/home/student/1960681/csc468/WeatherStation/src/weatherstation/WeatherYear.java</file>
+            <file>file:/home/student/1960681/csc468/WeatherStation/src/weatherstation/WeatherCollection.java</file>
+            <file>file:/home/student/1960681/csc468/WeatherStation/src/weatherstation/XMLParser.java</file>
         </group>
     </open-files>
 </project-private>

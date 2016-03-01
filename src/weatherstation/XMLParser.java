@@ -7,6 +7,7 @@ package weatherstation;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -29,7 +30,9 @@ public class XMLParser {
             
             while(fileIndex < directory.listFiles().length)
             {
-                File file = directory.listFiles()[fileIndex];
+                File[] files = directory.listFiles();
+                Arrays.sort(files);
+                File file = files[fileIndex];
                 fileIndex++;
                 Document document = builder.build(file);
                 Element root = document.getRootElement();
