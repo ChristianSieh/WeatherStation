@@ -45,6 +45,7 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
         
         if (windValue == -1){
             windDirection = "None";
+            return windDirection;
         } 
         
         WindDirection test = WindDirection.values()[windValue];
