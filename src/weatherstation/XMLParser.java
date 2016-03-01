@@ -314,18 +314,18 @@ public class XMLParser {
                                 tempYear.lowDate = tempDay.data.get(k).date;
                                 tempYear.lowTime = tempDay.data.get(k).time;
                             }                            
-                            if(tempDay.maxWindSpeed < tempDay.data.get(k).windSpeed){
-                                tempDay.maxWindSpeed = tempDay.data.get(k).windSpeed;
+                            if(tempDay.maxWindSpeed < tempDay.data.get(k).windGust){
+                                tempDay.maxWindSpeed = tempDay.data.get(k).windGust;
                                 tempDay.windSpeedDate = tempDay.data.get(k).date;
                                 tempDay.windSpeedTime = tempDay.data.get(k).time;
                             }
-                            if(tempMonth.maxWindSpeed < tempDay.data.get(k).windSpeed){
-                                tempMonth.maxWindSpeed = tempDay.data.get(k).windSpeed;
+                            if(tempMonth.maxWindSpeed < tempDay.data.get(k).windGust){
+                                tempMonth.maxWindSpeed = tempDay.data.get(k).windGust;
                                 tempMonth.windSpeedDate = tempDay.data.get(k).date;
                                 tempMonth.windSpeedTime = tempDay.data.get(k).time;
                             }
-                            if(tempYear.maxWindSpeed < tempDay.data.get(k).windSpeed){
-                                tempYear.maxWindSpeed = tempDay.data.get(k).windSpeed;
+                            if(tempYear.maxWindSpeed < tempDay.data.get(k).windGust){
+                                tempYear.maxWindSpeed = tempDay.data.get(k).windGust;
                                 tempYear.windSpeedDate = tempDay.data.get(k).date;
                                 tempYear.windSpeedTime = tempDay.data.get(k).time;
                             }                          
