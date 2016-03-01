@@ -144,6 +144,11 @@ public class XMLParser {
                             }  
                         }
                         
+                        if(tempDay.data.size() == 0) {
+                            continue;
+                            
+                        }
+                        
                         for (int k = 0; k < tempDay.data.size(); k++) {
                             
                             if("N".equals(tempDay.data.get(k).windDirection)) {
@@ -328,12 +333,13 @@ public class XMLParser {
                                 tempYear.maxWindSpeed = tempDay.data.get(k).windGust;
                                 tempYear.windSpeedDate = tempDay.data.get(k).date;
                                 tempYear.windSpeedTime = tempDay.data.get(k).time;
-                            }                          
+                            }
+                            
                         }
                         
                         tempDay.windDirection = dayString;
                         tempDay.windDirectionValue = dayWindDirectionValue;
-                                               
+
                         tempDay.meanTemp = 
                                 tempDay.meanTemp / tempDay.data.size();
                         tempDay.meanWindSpeed = 

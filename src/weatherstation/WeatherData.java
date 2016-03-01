@@ -15,17 +15,17 @@ public class WeatherData {
     
     public String date;
     public String time;
-    public Double temperature;
-    public Double humidity;
-    public Double barometer;
-    public Double windSpeed;
+    public double temperature;
+    public double humidity = 0.0;
+    public double barometer = 0.0;
+    public double windSpeed = 0.0;
     public String windDirection;
     public double windDirectionValue = -1;
-    public Double windGust;
-    public Double windChill;
-    public Double heatIndex;
-    public Double uvIndex;
-    public Double rainfall;
+    public double windGust = 0.0;
+    public double windChill = 0.0;
+    public double heatIndex = 0.0;
+    public double uvIndex = 0.0;
+    public double rainfall = 0.0;
     public int year;
     public int month;
     public int day;

@@ -15,14 +15,14 @@ public class WeatherMonth {
     
     public int month;
     public double meanTemp;
-    public double highTemp;
-    public double lowTemp;
+    public double highTemp = -1000000000;
+    public double lowTemp = 100000000;
     public String highDate;
     public String lowDate;
     public String highTime;
     public String lowTime;
-    public double meanWindSpeed;
-    public double maxWindSpeed;
+    public double meanWindSpeed = 0;
+    public double maxWindSpeed = 0;
     public String windSpeedDate;
     public String windSpeedTime;
     public String windDirection;

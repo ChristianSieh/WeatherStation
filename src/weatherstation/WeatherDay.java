@@ -23,7 +23,7 @@ public class WeatherDay {
     public String highTime;
     public String lowTime;
     public double meanWindSpeed = 0;
-    public double maxWindSpeed;
+    public double maxWindSpeed = 0;
     public String windSpeedDate;
     public String windSpeedTime;
     public String windDirection;
