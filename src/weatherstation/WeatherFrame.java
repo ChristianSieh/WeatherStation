@@ -7,6 +7,7 @@ package weatherstation;
 
 import static java.awt.Color.white;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -60,6 +61,32 @@ public class WeatherFrame extends javax.swing.JFrame {
     private ArrayList<String> monthList;
     private boolean filled;
     private JButton SubmitBtn;
+    private JTextField averageTemp;
+    private JTextField highTemp;
+    private JTextField highTempDate;
+    private JTextField highTempTime;
+    private JTextField lowTemp;
+    private JTextField lowTempDate;
+    private JTextField lowTempTime;
+    private JTextField averageWindSpeed;
+    private JTextField maxWindSpeed;
+    private JTextField windSpeedDate;
+    private JTextField windSpeedTime;
+    private JTextField prevailWindDirection;
+    private JTextField totalRainfall;
+    private JLabel averageTempLabel;
+    private JLabel highTempLabel;
+    private JLabel highTempDateLabel;
+    private JLabel highTempTimeLabel;
+    private JLabel lowTempLabel;
+    private JLabel lowTempDateLabel;
+    private JLabel lowTempTimeLabel;
+    private JLabel averageWindSpeedLabel;
+    private JLabel maxWindSpeedLabel;
+    private JLabel windSpeedDateLabel;
+    private JLabel windSpeedTimeLabel;
+    private JLabel prevailWindDirectionLabel;
+    private JLabel totalRainfallLabel;
     
     /**
      * Creates new form WeatherFrame
@@ -115,6 +142,44 @@ public class WeatherFrame extends javax.swing.JFrame {
         }};
         filled = false;
         SubmitBtn = new JButton("Submit");
+        averageTempLabel = new JLabel("Avg. Temp");
+        averageTemp = new JTextField();
+        
+        highTemp = new JTextField();
+        highTempLabel = new JLabel("High Temp");
+        
+        highTempDate = new JTextField();
+        highTempDateLabel = new JLabel("High Temp Date");
+        
+        highTempTime = new JTextField();
+        highTempTimeLabel = new JLabel("High Temp Time");
+        
+        lowTemp = new JTextField();
+        lowTempLabel = new JLabel("Low Temp");
+        
+        lowTempDate = new JTextField();
+        lowTempDateLabel = new JLabel("Low Temp Date");
+        
+        lowTempTime = new JTextField();
+        lowTempTimeLabel = new JLabel("Low Temp Time");
+        
+        averageWindSpeed = new JTextField();
+        averageWindSpeedLabel = new JLabel("Avg. Wind Speed");
+        
+        maxWindSpeed = new JTextField();
+        maxWindSpeedLabel = new JLabel("Max Wind Speed");
+        
+        windSpeedDate = new JTextField();
+        windSpeedDateLabel = new JLabel("Max Wind Date");
+        
+        windSpeedTime = new JTextField();
+        windSpeedTimeLabel = new JLabel("Max Wind Time");
+        
+        prevailWindDirection = new JTextField();
+        prevailWindDirectionLabel = new JLabel("Prevailing Wind Dir.");
+        
+        totalRainfall = new JTextField();
+        totalRainfallLabel = new JLabel("Total Rainfall");
 
         //fileChooser.setFileFilter(new xmlFilter());
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -232,7 +297,20 @@ public class WeatherFrame extends javax.swing.JFrame {
         
         TempGuagelabel.setText("Down here have all the guages");
 
-        javax.swing.GroupLayout GuagesPanelLayout = new GroupLayout(GuagesPanel);
+        GridLayout gridLayout = new GridLayout(0,4);
+        
+        GuagesPanel.setLayout(gridLayout);
+        
+        GuagesPanel.add(averageTempLabel);
+        GuagesPanel.add(averageTemp);
+        GuagesPanel.add(highTempLabel);
+        GuagesPanel.add(highTemp);
+        GuagesPanel.add(highTempDateLabel);
+        GuagesPanel.add(highTempDate);
+        GuagesPanel.add(highTempTimeLabel);
+        GuagesPanel.add(highTempTime);
+        
+       /* javax.swing.GroupLayout GuagesPanelLayout = new GroupLayout(GuagesPanel);
         GuagesPanel.setLayout(GuagesPanelLayout);
         GuagesPanelLayout.setHorizontalGroup(
             GuagesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -248,7 +326,7 @@ public class WeatherFrame extends javax.swing.JFrame {
                 .addComponent(TempGuagelabel, GroupLayout.PREFERRED_SIZE, 
                         27, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(80, Short.MAX_VALUE))
-        );
+        );*/
 
         YearLabel.setText("Year");
 
