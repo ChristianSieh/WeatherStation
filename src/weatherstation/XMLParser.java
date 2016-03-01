@@ -38,6 +38,7 @@ public class XMLParser {
                 int yearNum = Integer.parseInt(temp);
 
                 String yearString = "NULL";
+                int yearWindDirectionValue = -1;
                 WeatherYear tempYear = new WeatherYear(yearNum);
                 
                 // counters for pervailing winds 
@@ -61,6 +62,7 @@ public class XMLParser {
                 int yearHighest = 0;
 
                 String monthString = "NULL";
+                int monthWindDirectionValue = -1;
                 for(int monthIndex = 0; monthIndex < 12; monthIndex++)
                 {
                     WeatherMonth tempMonth = new WeatherMonth(monthIndex);
@@ -87,6 +89,7 @@ public class XMLParser {
                     int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
                     
                     String dayString = "NULL";
+                    int dayWindDirectionValue = -1;
                     List<Element> weatherList = root.getChildren(); // new spot
                     int XMLDayCounter = 0;
                     for(int dayIndex = 0; dayIndex < daysInMonth; dayIndex++)
@@ -144,7 +147,8 @@ public class XMLParser {
                                 dayNCounter += 1;
                                 if (dayNCounter > dayHighest) {
                                     dayHighest = dayNCounter;
-                                    dayString = "N";  
+                                    dayString = "N";
+                                    dayWindDirectionValue = 0;
                                 }
                             }
                             if("NNE".equals(tempDay.data.get(k).windDirection)) {
@@ -152,6 +156,7 @@ public class XMLParser {
                                 if (dayNNECounter > dayHighest) {
                                     dayHighest = dayNNECounter;
                                     dayString = "NNE";
+                                    dayWindDirectionValue = 1;
                                 }
                             }
                             if("NE".equals(tempDay.data.get(k).windDirection)) {
@@ -159,6 +164,7 @@ public class XMLParser {
                                 if (dayNECounter > dayHighest) {
                                     dayHighest = dayNECounter;
                                     dayString = "NE";
+                                    dayWindDirectionValue = 2;
                                 }
                             }
                             if("ENE".equals(tempDay.data.get(k).windDirection)) {
@@ -166,6 +172,7 @@ public class XMLParser {
                                 if (dayENECounter > dayHighest) {
                                     dayHighest = dayENECounter;
                                     dayString = "ENE";
+                                    dayWindDirectionValue = 3;
                                 }
                             }
                             if("E".equals(tempDay.data.get(k).windDirection)) {
@@ -173,6 +180,7 @@ public class XMLParser {
                                 if (dayECounter > dayHighest) {
                                     dayHighest = dayECounter;
                                     dayString = "E";
+                                    dayWindDirectionValue = 4;
                                 }
                             }
                             if("ESE".equals(tempDay.data.get(k).windDirection)) {
@@ -180,6 +188,7 @@ public class XMLParser {
                                 if (dayESECounter > dayHighest) {
                                     dayHighest = dayESECounter;
                                     dayString = "ESE";
+                                    dayWindDirectionValue = 5;
                                 }
                             }
                             if("SE".equals(tempDay.data.get(k).windDirection)) {
@@ -187,6 +196,7 @@ public class XMLParser {
                                 if (daySECounter > dayHighest) {
                                     dayHighest = daySECounter;
                                     dayString = "SE";
+                                    dayWindDirectionValue = 6;
                                 }
                             }
                             if("SSE".equals(tempDay.data.get(k).windDirection)) {
@@ -194,6 +204,7 @@ public class XMLParser {
                                  if (daySSECounter > dayHighest) {
                                     dayHighest = daySSECounter;
                                     dayString = "SSE";
+                                    dayWindDirectionValue = 7;
                                 }
                             }
                             if("S".equals(tempDay.data.get(k).windDirection)) {
@@ -201,6 +212,7 @@ public class XMLParser {
                                 if (daySCounter > dayHighest) {
                                     dayHighest = daySCounter;
                                     dayString = "S";
+                                    dayWindDirectionValue = 8;
                                 }
                             }
                             if("SSW".equals(tempDay.data.get(k).windDirection)) {
@@ -208,6 +220,7 @@ public class XMLParser {
                                 if (daySSWCounter > dayHighest) {
                                     dayHighest = daySSWCounter;
                                     dayString = "SSW";
+                                    dayWindDirectionValue = 9;
                                 }
                             }
                             if("SW".equals(tempDay.data.get(k).windDirection)) {
@@ -215,6 +228,7 @@ public class XMLParser {
                                 if (daySWCounter > dayHighest) {
                                     dayHighest = daySWCounter;
                                     dayString = "SW";
+                                    dayWindDirectionValue = 10;
                                 }
                             }
                             if("WSW".equals(tempDay.data.get(k).windDirection)) {
@@ -222,6 +236,7 @@ public class XMLParser {
                                  if (dayWSWCounter > dayHighest) {
                                     dayHighest = dayWSWCounter;
                                     dayString = "WSW";
+                                    dayWindDirectionValue = 11;
                                 }
                             }
                             if("W".equals(tempDay.data.get(k).windDirection)) {
@@ -229,6 +244,7 @@ public class XMLParser {
                                 if (dayWCounter > dayHighest) {
                                     dayHighest = dayWCounter;
                                     dayString = "W";
+                                    dayWindDirectionValue = 12;
                                 }
                             }
                             if("WNW".equals(tempDay.data.get(k).windDirection)) {
@@ -236,6 +252,7 @@ public class XMLParser {
                                 if (dayWNWCounter > dayHighest) {
                                     dayHighest = dayWNWCounter;
                                     dayString = "WNW";
+                                    dayWindDirectionValue = 13;
                                 }
                             }
                             if("NW".equals(tempDay.data.get(k).windDirection)) {
@@ -243,6 +260,7 @@ public class XMLParser {
                                 if (dayNWCounter > dayHighest) {
                                     dayHighest = dayNWCounter;
                                     dayString = "NW";
+                                    dayWindDirectionValue = 14;
                                 }
                             }
                             if("NNW".equals(tempDay.data.get(k).windDirection)) {
@@ -250,6 +268,7 @@ public class XMLParser {
                                 if (dayNNWCounter > dayHighest) {
                                     dayHighest = dayNNWCounter;
                                     dayString = "NNW";
+                                    dayWindDirectionValue = 15;
                                 }
                             }
 
@@ -309,7 +328,8 @@ public class XMLParser {
                             }                          
                         }
                         
-                        tempDay.windDirection = dayString; 
+                        tempDay.windDirection = dayString;
+                        tempDay.windDirectionValue = dayWindDirectionValue;
                                                
                         tempDay.meanTemp = 
                                 tempDay.meanTemp / tempDay.data.size();
@@ -327,6 +347,7 @@ public class XMLParser {
                             if (monthNCounter > monthHighest) {
                                 monthHighest = monthNCounter;
                                 monthString = "N";
+                                monthWindDirectionValue = 0;
                             }
                         }
                         if("NNE".equals(tempDay.windDirection)) {
@@ -334,6 +355,7 @@ public class XMLParser {
                             if (monthNNECounter > monthHighest) {
                                 monthHighest = monthNNECounter;
                                 monthString = "NNE";
+                                monthWindDirectionValue = 1;
                             }
                         }
                         if("NE".equals(tempDay.windDirection)) {
@@ -341,6 +363,7 @@ public class XMLParser {
                             if (monthNECounter > monthHighest) {
                                 monthHighest = monthNECounter;
                                 monthString = "NE";
+                                monthWindDirectionValue = 2;
                             }
                         }
                         if("ENE".equals(tempDay.windDirection)) {
@@ -348,6 +371,7 @@ public class XMLParser {
                             if (monthENECounter > monthHighest) {
                                 monthHighest = monthENECounter;
                                 monthString = "ENE";
+                                monthWindDirectionValue = 3;
                             }
                         }
                         if("E".equals(tempDay.windDirection)) {
@@ -355,6 +379,7 @@ public class XMLParser {
                             if (monthECounter > monthHighest) {
                                 monthHighest = monthECounter;
                                 monthString = "E";
+                                monthWindDirectionValue = 4;
                             }
                         }
                         if("ESE".equals(tempDay.windDirection)) {
@@ -362,6 +387,7 @@ public class XMLParser {
                             if (monthESECounter > monthHighest) {
                                 monthHighest = monthESECounter;
                                 monthString = "ESE";
+                                monthWindDirectionValue = 5;
                             }
                         }
                         if("SE".equals(tempDay.windDirection)) {
@@ -369,6 +395,7 @@ public class XMLParser {
                             if (monthSECounter > monthHighest) {
                                 monthHighest = monthSECounter;
                                 monthString = "SE";
+                                monthWindDirectionValue = 6;
                             }
                         }
                         if("SSE".equals(tempDay.windDirection)) {
@@ -376,6 +403,7 @@ public class XMLParser {
                              if (monthSSECounter > monthHighest) {
                                 monthHighest = monthSSECounter;
                                 monthString = "SSE";
+                                monthWindDirectionValue = 7;
                             }
                         }
                         if("S".equals(tempDay.windDirection)) {
@@ -383,6 +411,7 @@ public class XMLParser {
                             if (monthSCounter > monthHighest) {
                                 monthHighest = monthSCounter;
                                 monthString = "S";
+                                monthWindDirectionValue = 8;
                             }
                         }
                         if("SSW".equals(tempDay.windDirection)) {
@@ -390,6 +419,7 @@ public class XMLParser {
                             if (monthSSWCounter > monthHighest) {
                                 monthHighest = monthSSWCounter;
                                 monthString = "SSW";
+                                monthWindDirectionValue = 9;
                             }
                         }
                         if("SW".equals(tempDay.windDirection)) {
@@ -397,6 +427,7 @@ public class XMLParser {
                             if (monthSWCounter > monthHighest) {
                                 monthHighest = monthSWCounter;
                                 monthString = "SW";
+                                monthWindDirectionValue = 10;
                             }
                         }
                         if("WSW".equals(tempDay.windDirection)) {
@@ -404,6 +435,7 @@ public class XMLParser {
                              if (monthWSWCounter > monthHighest) {
                                 monthHighest = monthWSWCounter;
                                 monthString = "WSW";
+                                monthWindDirectionValue = 11;
                             }
                         }
                         if("W".equals(tempDay.windDirection)) {
@@ -411,6 +443,7 @@ public class XMLParser {
                             if (monthWCounter > monthHighest) {
                                 monthHighest = monthWCounter;
                                 monthString = "W";
+                                monthWindDirectionValue = 12;
                             }
                         }
                         if("WNW".equals(tempDay.windDirection)) {
@@ -418,6 +451,7 @@ public class XMLParser {
                             if (monthWNWCounter > monthHighest) {
                                 monthHighest = monthWNWCounter;
                                 monthString = "WNW";
+                                monthWindDirectionValue = 13;
                             }
                         }
                         if("NW".equals(tempDay.windDirection)) {
@@ -425,6 +459,7 @@ public class XMLParser {
                             if (monthNWCounter > monthHighest) {
                                 monthHighest = monthNWCounter;
                                 monthString = "NW";
+                                monthWindDirectionValue = 14;
                             }
                         }
                         if("NNW".equals(tempDay.windDirection)) {
@@ -432,6 +467,7 @@ public class XMLParser {
                             if (monthNNWCounter > monthHighest) {
                                 monthHighest = monthNNWCounter;
                                 monthString = "NNW";
+                                monthWindDirectionValue = 15;
                             }
                         }
                                                 
@@ -442,6 +478,7 @@ public class XMLParser {
                     if(fileIndex < directory.listFiles().length)
                     {
                         tempMonth.windDirection = monthString;
+                        tempMonth.windDirectionValue = monthWindDirectionValue;
                         tempMonth.meanTemp = 
                                 tempMonth.meanTemp / tempMonth.days.size();
                         tempMonth.meanWindSpeed = 
@@ -454,6 +491,7 @@ public class XMLParser {
                                 if (yearNCounter > yearHighest) {
                                     yearHighest = yearNCounter;
                                     yearString = "N";
+                                    yearWindDirectionValue = 0;
                                     
                                 }
                             }
@@ -462,6 +500,7 @@ public class XMLParser {
                                 if (yearNNECounter > yearHighest) {
                                     yearHighest = yearNNECounter;
                                     yearString = "NNE";
+                                    yearWindDirectionValue = 1;
                                 }
                             }
                             if("NE".equals(tempMonth.windDirection)) {
@@ -469,6 +508,7 @@ public class XMLParser {
                                 if (yearNECounter > yearHighest) {
                                     yearHighest = yearNECounter;
                                     yearString = "NE";
+                                    yearWindDirectionValue = 2;
                                 }
                             }
                             if("ENE".equals(tempMonth.windDirection)) {
@@ -476,6 +516,7 @@ public class XMLParser {
                                 if (yearENECounter > yearHighest) {
                                     yearHighest = yearENECounter;
                                     yearString = "ENE";
+                                    yearWindDirectionValue = 3;
                                 }
                             }
                             if("E".equals(tempMonth.windDirection)) {
@@ -483,6 +524,7 @@ public class XMLParser {
                                 if (yearECounter > yearHighest) {
                                     yearHighest = yearECounter;
                                     yearString = "E";
+                                    yearWindDirectionValue = 4;
                                 }
                             }
                             if("ESE".equals(tempMonth.windDirection)) {
@@ -490,6 +532,7 @@ public class XMLParser {
                                 if (yearESECounter > yearHighest) {
                                     yearHighest = yearESECounter;
                                     yearString = "ESE";
+                                    yearWindDirectionValue = 5;
                                 }
                             }
                             if("SE".equals(tempMonth.windDirection)) {
@@ -497,6 +540,7 @@ public class XMLParser {
                                 if (yearSECounter > yearHighest) {
                                     yearHighest = yearSECounter;
                                     yearString = "SE";
+                                    yearWindDirectionValue = 6;
                                 }
                             }
                             if("SSE".equals(tempMonth.windDirection)) {
@@ -504,6 +548,7 @@ public class XMLParser {
                                  if (yearSSECounter > yearHighest) {
                                     yearHighest = yearSSECounter;
                                     yearString = "SSE";
+                                    yearWindDirectionValue = 7;
                                 }
                             }
                             if("S".equals(tempMonth.windDirection)) {
@@ -511,6 +556,7 @@ public class XMLParser {
                                 if (yearSCounter > yearHighest) {
                                     yearHighest = yearSCounter;
                                     yearString = "S";
+                                    yearWindDirectionValue = 8;
                                 }
                             }
                             if("SSW".equals(tempMonth.windDirection)) {
@@ -518,6 +564,7 @@ public class XMLParser {
                                 if (yearSSWCounter > yearHighest) {
                                     yearHighest = yearSSWCounter;
                                     yearString = "SSW";
+                                    yearWindDirectionValue = 9;
                                 }
                             }
                             if("SW".equals(tempMonth.windDirection)) {
@@ -525,6 +572,7 @@ public class XMLParser {
                                 if (yearSWCounter > yearHighest) {
                                     yearHighest = yearSWCounter;
                                     yearString = "SW";
+                                    yearWindDirectionValue = 10;
                                 }
                             }
                             if("WSW".equals(tempMonth.windDirection)) {
@@ -532,6 +580,7 @@ public class XMLParser {
                                  if (yearWSWCounter > yearHighest) {
                                     yearHighest = yearWSWCounter;
                                     yearString = "WSW";
+                                    yearWindDirectionValue = 11;
                                 }
                             }
                             if("W".equals(tempMonth.windDirection)) {
@@ -539,6 +588,7 @@ public class XMLParser {
                                 if (yearWCounter > yearHighest) {
                                     yearHighest = yearWCounter;
                                     yearString = "W";
+                                    yearWindDirectionValue = 12;
                                 }
                             }
                             if("WNW".equals(tempMonth.windDirection)) {
@@ -546,6 +596,7 @@ public class XMLParser {
                                 if (yearWNWCounter > yearHighest) {
                                     yearHighest = yearWNWCounter;
                                     yearString = "WNW";
+                                    yearWindDirectionValue = 13;
                                 }
                             }
                             if("NW".equals(tempMonth.windDirection)) {
@@ -553,6 +604,7 @@ public class XMLParser {
                                 if (yearNWCounter > yearHighest) {
                                     yearHighest = yearNWCounter;
                                     yearString = "NW";
+                                    yearWindDirectionValue = 14;
                                 }
                             }
                             if("NNW".equals(tempMonth.windDirection)) {
@@ -560,6 +612,7 @@ public class XMLParser {
                                 if (yearNNWCounter > yearHighest) {
                                     yearHighest = yearNNWCounter;
                                     yearString = "NNW";
+                                    yearWindDirectionValue = 15;
                                 }
                             }
                         
@@ -572,6 +625,7 @@ public class XMLParser {
                 processWeeks(tempYear);
                 
                 tempYear.windDirection = yearString;
+                tempYear.windDirectionValue = yearWindDirectionValue;
                 tempYear.meanTemp = tempYear.meanTemp / tempYear.days.size();
                 tempYear.meanWindSpeed = 
                         tempYear.meanWindSpeed / tempYear.days.size();
@@ -633,6 +687,7 @@ public class XMLParser {
    
         for (int i = 0; i < year.weeks.size(); i++) {
             String weekString = "NULL";
+            int weekWindDirectionValue = -1;
             for (int j = 0; j < year.weeks.get(i).days.size(); j++) {
                 
                 if("N".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -640,6 +695,7 @@ public class XMLParser {
                     if (weekNCounter > weekHighest) {
                         weekHighest = weekNCounter;
                         weekString = "N";
+                        weekWindDirectionValue = 0;
                     }
                 }
                 if("NNE".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -647,6 +703,7 @@ public class XMLParser {
                     if (weekNNECounter > weekHighest) {
                         weekHighest = weekNNECounter;
                         weekString = "NNE";
+                        weekWindDirectionValue = 1;
                     }
                 }
                 if("NE".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -654,6 +711,7 @@ public class XMLParser {
                     if (weekNECounter > weekHighest) {
                         weekHighest = weekNECounter;
                         weekString = "NE";
+                        weekWindDirectionValue = 2;
                     }
                 }
                 if("ENE".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -661,6 +719,7 @@ public class XMLParser {
                     if (weekENECounter > weekHighest) {
                         weekHighest = weekENECounter;
                         weekString = "ENE";
+                        weekWindDirectionValue = 3;
                     }
                 }
                 if("E".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -668,6 +727,7 @@ public class XMLParser {
                     if (weekECounter > weekHighest) {
                         weekHighest = weekECounter;
                         weekString = "E";
+                        weekWindDirectionValue = 4;
                     }
                 }
                 if("ESE".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -675,6 +735,7 @@ public class XMLParser {
                     if (weekESECounter > weekHighest) {
                         weekHighest = weekESECounter;
                         weekString = "ESE";
+                        weekWindDirectionValue = 5;
                     }
                 }
                 if("SE".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -682,6 +743,7 @@ public class XMLParser {
                     if (weekSECounter > weekHighest) {
                         weekHighest = weekSECounter;
                         weekString = "SE";
+                        weekWindDirectionValue = 6;
                     }
                 }
                 if("SSE".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -689,6 +751,7 @@ public class XMLParser {
                      if (weekSSECounter > weekHighest) {
                         weekHighest = weekSSECounter;
                         weekString = "SSE";
+                        weekWindDirectionValue = 7;
                     }
                 }
                 if("S".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -696,6 +759,7 @@ public class XMLParser {
                     if (weekSCounter > weekHighest) {
                         weekHighest = weekSCounter;
                         weekString = "S";
+                        weekWindDirectionValue = 8;
                     }
                 }
                 if("SSW".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -703,6 +767,7 @@ public class XMLParser {
                     if (weekSSWCounter > weekHighest) {
                         weekHighest = weekSSWCounter;
                         weekString = "SSW";
+                        weekWindDirectionValue = 9;
                     }
                 }
                 if("SW".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -710,6 +775,7 @@ public class XMLParser {
                     if (weekSWCounter > weekHighest) {
                         weekHighest = weekSWCounter;
                         weekString = "SW";
+                        weekWindDirectionValue = 10;
                     }
                 }
                 if("WSW".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -717,6 +783,7 @@ public class XMLParser {
                      if (weekWSWCounter > weekHighest) {
                         weekHighest = weekWSWCounter;
                         weekString = "WSW";
+                        weekWindDirectionValue = 11;
                     }
                 }
                 if("W".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -724,6 +791,7 @@ public class XMLParser {
                     if (weekWCounter > weekHighest) {
                         weekHighest = weekWCounter;
                         weekString = "W";
+                        weekWindDirectionValue = 12;
                     }
                 }
                 if("WNW".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -731,6 +799,7 @@ public class XMLParser {
                     if (weekWNWCounter > weekHighest) {
                         weekHighest = weekWNWCounter;
                         weekString = "WNW";
+                        weekWindDirectionValue = 13;
                     }
                 }
                 if("NW".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -738,6 +807,7 @@ public class XMLParser {
                     if (weekNWCounter > weekHighest) {
                         weekHighest = weekNWCounter;
                         weekString = "NW";
+                        weekWindDirectionValue = 14;
                     }
                 }
                 if("NNW".equals(year.weeks.get(i).days.get(j).windDirection)) {
@@ -745,10 +815,12 @@ public class XMLParser {
                     if (weekNNWCounter > weekHighest) {
                         weekHighest = weekNNWCounter;
                         weekString = "NNW";
+                        weekWindDirectionValue = 15;
                     }
                 }
                 
                 year.weeks.get(i).windDirection = weekString;
+                year.weeks.get(i).windDirectionValue = weekWindDirectionValue;
                 year.weeks.get(i).meanTemp = year.weeks.get(i).days.get(j).meanTemp;
                 year.weeks.get(i).meanWindSpeed = year.weeks.get(i).days.get(j).meanWindSpeed;
                 year.weeks.get(i).totalRainfall = year.weeks.get(i).days.get(j).totalRainfall;

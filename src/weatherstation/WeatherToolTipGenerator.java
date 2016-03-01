@@ -7,6 +7,7 @@ package weatherstation;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.data.xy.XYDataset;
 
@@ -16,11 +17,16 @@ import org.jfree.data.xy.XYDataset;
  */
 public class WeatherToolTipGenerator implements XYToolTipGenerator
 {
+    @Override
     public String generateToolTip(XYDataset xyDataset, int series, int item)
     {
+        String windDirection;
+        
         DecimalFormat form = new DecimalFormat("00.0");
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm");
         Number time = xyDataset.getX(series, item);
+        windDirection = checkWindDirection(form.format(xyDataset.getYValue(9, item)));
+        
         return ("<html>" + sdf.format(time) + "<br>"
         + " Temperature: " + form.format(xyDataset.getYValue(0, item)) + "<br>"
         + "Humidity: " + form.format(xyDataset.getYValue(1, item)) + "<br>"
@@ -30,6 +36,25 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
         + "Heat Index: " + form.format(xyDataset.getYValue(5, item)) + "<br>"
         + "UV Index: " + form.format(xyDataset.getYValue(6, item)) + "<br>"
         + "Rainfall: " + form.format(xyDataset.getYValue(7, item)) + "<br>"
+        + "Wind Direction " + windDirection + "<br>" 
         + "Wind Gust: " + form.format(xyDataset.getYValue(8, item)) + "</html>");
     }
+    
+    public String checkWindDirection(String windvalue) {
+        int windNumber =  Integer.parseInt(windvalue);
+        String windDirection;
+        
+        if (windNumber == -1){
+            windDirection = "None";
+        } 
+        
+        WindDirection test = WindDirection.values()[windNumber];
+        windDirection = test.name();
+        
+        System.out.print(windDirection);
+        
+        
+        
+        return windDirection;
+    } 
 }

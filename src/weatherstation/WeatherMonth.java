@@ -26,6 +26,7 @@ public class WeatherMonth {
     public String windSpeedDate;
     public String windSpeedTime;
     public String windDirection;
+    public int windDirectionValue = -1;
     public double totalRainfall;
     ArrayList<WeatherDay> days;
     
