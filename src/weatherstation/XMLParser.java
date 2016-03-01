@@ -27,11 +27,11 @@ public class XMLParser {
         try
         {
             int fileIndex = 0;
+            File[] files = directory.listFiles();
+            Arrays.sort(files);
             
-            while(fileIndex < directory.listFiles().length)
+            while(fileIndex < files.length)
             {
-                File[] files = directory.listFiles();
-                Arrays.sort(files);
                 File file = files[fileIndex];
                 fileIndex++;
                 Document document = builder.build(file);
@@ -478,7 +478,7 @@ public class XMLParser {
                         tempYear.days.add(tempDay);                         
                     }
                     
-                    if(fileIndex < directory.listFiles().length)
+                    if(fileIndex < files.length)
                     {
                         tempMonth.windDirection = monthString;
                         tempMonth.windDirectionValue = monthWindDirectionValue;
@@ -619,7 +619,7 @@ public class XMLParser {
                                 }
                             }
                         
-                        file = directory.listFiles()[fileIndex];
+                        file = files[fileIndex];
                         fileIndex++;
                         document = builder.build(file);
                         root = document.getRootElement();

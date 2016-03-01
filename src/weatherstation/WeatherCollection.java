@@ -55,7 +55,7 @@ public class WeatherCollection extends TimeSeriesCollection
         windGustSeries.clear();
         windDirectionSeries.clear();
         
-        if(display == "Year")
+        if("Year".equals(display))
         {
             for(int i = 0; i < yearsList.get(year).days.size(); i++)
             {
@@ -79,7 +79,7 @@ public class WeatherCollection extends TimeSeriesCollection
             }
         }
         
-        else if(display == "Month")
+        else if("Month".equals(display))
         {
             WeatherMonth tempMonth = yearsList.get(year).months.get(month);
             
@@ -90,6 +90,10 @@ public class WeatherCollection extends TimeSeriesCollection
                 {
                     WeatherData tempData = tempDay.data.get(j);
                     Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
+                    if(tempData.temperature > 50)
+                    {
+                      int test = 0;  
+                    }
                     temperatureSeries.add(minuteType, tempData.temperature);
                     humiditySeries.add(minuteType, tempData.humidity);
                     barometricSeries.add(minuteType, tempData.barometer);
@@ -104,7 +108,7 @@ public class WeatherCollection extends TimeSeriesCollection
             }
         }
         
-        else if(display == "Week")
+        else if("Week".equals(display))
         {
             int Week  = yearsList.get(year).months.get(month).days.get(day).week;
             System.out.print(yearsList.get(year).months.get(month).days.get(day).week);
@@ -115,8 +119,6 @@ public class WeatherCollection extends TimeSeriesCollection
             for(int i = 0; i < tempWeek.days.size(); i++)
             {
                 WeatherDay tempDay = tempWeek.days.get(i);
-                System.out.print(' ');
-                System.out.print(tempDay.data.size());
                 
                 for(int j = 0; j < tempDay.data.size(); j++)
                 {
@@ -136,7 +138,7 @@ public class WeatherCollection extends TimeSeriesCollection
             }
         }
         
-        else if(display == "Day")
+        else if("Day".equals(display))
         {
             WeatherDay tempDay = yearsList.get(year).months.get(month).days.get(day);
             
