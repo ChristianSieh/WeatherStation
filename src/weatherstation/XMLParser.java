@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.*;
@@ -68,6 +67,10 @@ public class XMLParser {
                 int monthWindDirectionValue = -1;
                 for(int monthIndex = 0; monthIndex < 12; monthIndex++)
                 {
+                    if(yearNum == 2015 && monthIndex == 11)
+                    {
+                        int test = 0;
+                    }
                     WeatherMonth tempMonth = new WeatherMonth(monthIndex);
                     int monthNCounter = 0;
                     int monthNNECounter = 0;
@@ -481,7 +484,7 @@ public class XMLParser {
                         tempYear.days.add(tempDay);                         
                 }
                     
-                if(fileIndex < files.length)
+                if(fileIndex <= files.length)
                 {
                     tempMonth.windDirection = monthString;
                     tempMonth.windDirectionValue = monthWindDirectionValue;
@@ -622,10 +625,13 @@ public class XMLParser {
                             }
                         }
                         
-                        file = files[fileIndex];
-                        fileIndex++;
-                        document = builder.build(file);
-                        root = document.getRootElement();
+                        if(fileIndex < files.length)
+                        {
+                            file = files[fileIndex];
+                            fileIndex++;
+                            document = builder.build(file);
+                            root = document.getRootElement();
+                        }
                     }   
                 }
                 processWeeks(tempYear);
@@ -670,7 +676,7 @@ public class XMLParser {
         for (int i = 0; i < year.days.size(); i++)
         {   
             Calendar c = Calendar.getInstance();
-            Date tempDate = new Date(year.year, year.days.get(i).month, (i+1) );
+            Date tempDate = new Date(year.year, year.days.get(i).month, year.days.get(i).day );
             c.setTime(tempDate);
             
             //Gets which week this day belongs to for that year
@@ -679,6 +685,7 @@ public class XMLParser {
             //Set the day to have that week so we can use the week number for 
             //displaying in the GUI
 	    year.days.get(i).week = weekOfYear;
+            
             if (weekCounter == weekOfYear) {
                 tempWeek.days.add(year.days.get(i));
             }
