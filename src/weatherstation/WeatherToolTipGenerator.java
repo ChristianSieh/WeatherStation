@@ -21,16 +21,16 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
     @Override
     public String generateToolTip(XYDataset xyDataset, int series, int item)
     {
-		//String for the wind direction
+        //String for the wind direction
         String windDirection;
         
-		//Format the data
+        //Format the data
         DecimalFormat form = new DecimalFormat("00.0");
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy HH:mm");
         Number time = xyDataset.getX(series, item);
         windDirection = checkWindDirection((int)xyDataset.getYValue(9, item));
         
-		//Return the formatted text for the tool tip
+        //Return the formatted text for the tool tip
         return ("<html>" + sdf.format(time) + "<br>"
         + " Temperature: " + form.format(xyDataset.getYValue(0, item)) + "<br>"
         + "Humidity: " + form.format(xyDataset.getYValue(1, item)) + "<br>"
@@ -44,28 +44,29 @@ public class WeatherToolTipGenerator implements XYToolTipGenerator
         + "Wind Direction: " + windDirection + "</html>");
     }
     
-	/*==========================================================================
+    /*==========================================================================
         Function: checkWindDirection()
-		
+
         Description: 
             This function is a constructor for the WeatherData class, it 
         parses XML elements ( namely <weather> ) to get the weather data.
-		
+
         Parameters: 
             int windValue - Value the wind direction is set at.
-			
+
         Returns: windDirection
     ==========================================================================*/
     public String checkWindDirection(int windValue) {
         String windDirection;
         
+        //If there is no wind direction
         if (windValue == -1){
             windDirection = "None";
             return windDirection;
         } 
         
-        WindDirection test = WindDirection.values()[windValue];
-        windDirection = test.name();
+        WindDirection windEnum = WindDirection.values()[windValue];
+        windDirection = windEnum.name();
 
         return windDirection;
     } 

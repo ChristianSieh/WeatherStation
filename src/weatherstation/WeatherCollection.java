@@ -68,6 +68,7 @@ public class WeatherCollection extends TimeSeriesCollection
     public void updateSeries(ArrayList<WeatherYear> yearsList,
             int year, int month, int day, String display)
     {
+        //Clear all the series so we can add the new data to them
         temperatureSeries.clear();
         humiditySeries.clear();
         barometricSeries.clear();
@@ -79,15 +80,84 @@ public class WeatherCollection extends TimeSeriesCollection
         windGustSeries.clear();
         windDirectionSeries.clear();
         
-        if("Year".equals(display))
+        //Switch based on what display option was selected
+        //This will build the series used in the dataset
+        if(null != display)
+        switch (display) 
         {
-            for(int i = 0; i < yearsList.get(year).days.size(); i++)
-            {
-                WeatherDay tempDay = yearsList.get(year).days.get(i);
-                
-                for(int j = 0; j < yearsList.get(year).days.get(i).data.size(); j++)
+            case "Year":
+                for(int i = 0; i < yearsList.get(year).days.size(); i++)
                 {
-                    WeatherData tempData = tempDay.data.get(j);
+                    WeatherDay tempDay = yearsList.get(year).days.get(i);
+                    
+                    for(int j = 0; j < yearsList.get(year).days.get(i).data.size(); j++)
+                    {
+                        WeatherData tempData = tempDay.data.get(j);
+                        Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
+                        temperatureSeries.add(minuteType, tempData.temperature);
+                        humiditySeries.add(minuteType, tempData.humidity);
+                        barometricSeries.add(minuteType, tempData.barometer);
+                        windSpeedSeries.add(minuteType, tempData.windSpeed);
+                        windChillSeries.add(minuteType, tempData.windChill);
+                        heatIndexSeries.add(minuteType, tempData.heatIndex);
+                        uvIndexSeries.add(minuteType, tempData.uvIndex);
+                        rainfallSeries.add(minuteType, tempData.rainfall);
+                        windGustSeries.add(minuteType, tempData.windGust);
+                        windDirectionSeries.add(minuteType, tempData.windDirectionValue);
+                    }
+                }   break;
+            case "Month":
+                WeatherMonth tempMonth = yearsList.get(year).months.get(month);
+                for(int i = 0; i < tempMonth.days.size(); i++)
+                {
+                    WeatherDay tempDay = tempMonth.days.get(i);
+                    for(int j = 0; j < tempDay.data.size(); j++)
+                    {
+                        WeatherData tempData = tempDay.data.get(j);
+                        Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
+                        temperatureSeries.add(minuteType, tempData.temperature);
+                        humiditySeries.add(minuteType, tempData.humidity);
+                        barometricSeries.add(minuteType, tempData.barometer);
+                        windSpeedSeries.add(minuteType, tempData.windSpeed);
+                        windChillSeries.add(minuteType, tempData.windChill);
+                        heatIndexSeries.add(minuteType, tempData.heatIndex);
+                        uvIndexSeries.add(minuteType, tempData.uvIndex);
+                        rainfallSeries.add(minuteType, tempData.rainfall);
+                        windGustSeries.add(minuteType, tempData.windGust);
+                        windDirectionSeries.add(minuteType, tempData.windDirectionValue);
+                    }
+                }   break;
+            case "Week":
+                int Week  = yearsList.get(year).months.get(month).days.get(day).week;
+                System.out.print(yearsList.get(year).months.get(month).days.get(day).week);
+                WeatherWeek tempWeek = yearsList.get(year).weeks.get(Week -1);
+                System.out.print(' ');
+                System.out.print(tempWeek.days.size());
+                for(int i = 0; i < tempWeek.days.size(); i++)
+                {
+                    WeatherDay tempDay = tempWeek.days.get(i);
+                    
+                    for(int j = 0; j < tempDay.data.size(); j++)
+                    {
+                        WeatherData tempData = tempDay.data.get(j);
+                        Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
+                        temperatureSeries.add(minuteType, tempData.temperature);
+                        humiditySeries.add(minuteType, tempData.humidity);
+                        barometricSeries.add(minuteType, tempData.barometer);
+                        windSpeedSeries.add(minuteType, tempData.windSpeed);
+                        windChillSeries.add(minuteType, tempData.windChill);
+                        heatIndexSeries.add(minuteType, tempData.heatIndex);
+                        uvIndexSeries.add(minuteType, tempData.uvIndex);
+                        rainfallSeries.add(minuteType, tempData.rainfall);
+                        windGustSeries.add(minuteType, tempData.windGust);
+                        windDirectionSeries.add(minuteType, tempData.windDirectionValue);
+                    }
+                }   break;
+            case "Day":
+                WeatherDay tempDay = yearsList.get(year).months.get(month).days.get(day);
+                for(int i = 0; i < tempDay.data.size(); i++)
+                {
+                    WeatherData tempData = tempDay.data.get(i);
                     Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
                     temperatureSeries.add(minuteType, tempData.temperature);
                     humiditySeries.add(minuteType, tempData.humidity);
@@ -97,89 +167,15 @@ public class WeatherCollection extends TimeSeriesCollection
                     heatIndexSeries.add(minuteType, tempData.heatIndex);
                     uvIndexSeries.add(minuteType, tempData.uvIndex);
                     rainfallSeries.add(minuteType, tempData.rainfall);
-                    windGustSeries.add(minuteType, tempData.windGust);
-                    windDirectionSeries.add(minuteType, tempData.windDirectionValue);
-                }
-            }
-        }
-        
-        else if("Month".equals(display))
-        {
-            WeatherMonth tempMonth = yearsList.get(year).months.get(month);
-            
-            for(int i = 0; i < tempMonth.days.size(); i++)
-            {
-                WeatherDay tempDay = tempMonth.days.get(i);
-                for(int j = 0; j < tempDay.data.size(); j++)
-                {
-                    WeatherData tempData = tempDay.data.get(j);
-                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
-                    temperatureSeries.add(minuteType, tempData.temperature);
-                    humiditySeries.add(minuteType, tempData.humidity);
-                    barometricSeries.add(minuteType, tempData.barometer);
-                    windSpeedSeries.add(minuteType, tempData.windSpeed);
-                    windChillSeries.add(minuteType, tempData.windChill);
-                    heatIndexSeries.add(minuteType, tempData.heatIndex);
-                    uvIndexSeries.add(minuteType, tempData.uvIndex);
-                    rainfallSeries.add(minuteType, tempData.rainfall);
-                    windGustSeries.add(minuteType, tempData.windGust);
-                    windDirectionSeries.add(minuteType, tempData.windDirectionValue);
-                }
-            }
-        }
-        
-        else if("Week".equals(display))
-        {
-            int Week  = yearsList.get(year).months.get(month).days.get(day).week;
-            System.out.print(yearsList.get(year).months.get(month).days.get(day).week);
-            WeatherWeek tempWeek = yearsList.get(year).weeks.get(Week -1);
-            System.out.print(' ');
-            System.out.print(tempWeek.days.size());
-            
-            for(int i = 0; i < tempWeek.days.size(); i++)
-            {
-                WeatherDay tempDay = tempWeek.days.get(i);
-                
-                for(int j = 0; j < tempDay.data.size(); j++)
-                {
-                    WeatherData tempData = tempDay.data.get(j);
-                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
-                    temperatureSeries.add(minuteType, tempData.temperature);
-                    humiditySeries.add(minuteType, tempData.humidity);
-                    barometricSeries.add(minuteType, tempData.barometer);
-                    windSpeedSeries.add(minuteType, tempData.windSpeed);
-                    windChillSeries.add(minuteType, tempData.windChill);
-                    heatIndexSeries.add(minuteType, tempData.heatIndex);
-                    uvIndexSeries.add(minuteType, tempData.uvIndex);
-                    rainfallSeries.add(minuteType, tempData.rainfall);
-                    windGustSeries.add(minuteType, tempData.windGust);
-                    windDirectionSeries.add(minuteType, tempData.windDirectionValue);
-                }
-            }
-        }
-        
-        else if("Day".equals(display))
-        {
-            WeatherDay tempDay = yearsList.get(year).months.get(month).days.get(day);
-            
-            for(int i = 0; i < tempDay.data.size(); i++)
-            {
-                WeatherData tempData = tempDay.data.get(i);
-                Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
-                temperatureSeries.add(minuteType, tempData.temperature);
-                humiditySeries.add(minuteType, tempData.humidity);
-                barometricSeries.add(minuteType, tempData.barometer);
-                windSpeedSeries.add(minuteType, tempData.windSpeed);
-                windChillSeries.add(minuteType, tempData.windChill);
-                heatIndexSeries.add(minuteType, tempData.heatIndex);
-                uvIndexSeries.add(minuteType, tempData.uvIndex);
-                rainfallSeries.add(minuteType, tempData.rainfall);
                 windGustSeries.add(minuteType, tempData.windGust);
                 windDirectionSeries.add(minuteType, tempData.windDirectionValue);
-            }
+            }   break;
         }
         
+        //Remove all the series currently in the collection
         removeAllSeries();
+        
+        //Add all the new series to the collection
         addSeries(temperatureSeries);
         addSeries(humiditySeries);
         addSeries(barometricSeries);
@@ -190,16 +186,5 @@ public class WeatherCollection extends TimeSeriesCollection
         addSeries(rainfallSeries);
         addSeries(windGustSeries);
         addSeries(windDirectionSeries);
-    }
-    
-    private enum Series{
-        Temperature,
-        Humidity,
-        BarometricPressure,
-        WindSpeed,
-        WindChill,
-        HeatIndex,
-        UVIndex,
-        Rainfall
     }
 }
