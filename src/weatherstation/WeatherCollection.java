@@ -1,8 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/******************************************************************************
+ * File: WeatherCollection.java                                               *
+ ******************************************************************************/
 package weatherstation;
 
 import java.util.ArrayList;
@@ -10,10 +8,15 @@ import org.jfree.data.time.Minute;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 
-/**
- *
- * @author 1960681
- */
+/*==============================================================================
+    Class: WeatherToolTipGenerator
+	
+    Extends/Implements: TimeSeriesCollection (From JFreeCharts.org)
+	
+    Description: 
+        This class defines fields and a constructor for the WeatherCollection 
+    class.
+==============================================================================*/
 public class WeatherCollection extends TimeSeriesCollection
 {
     private TimeSeries temperatureSeries;
@@ -27,6 +30,14 @@ public class WeatherCollection extends TimeSeriesCollection
     private TimeSeries windGustSeries;
     private TimeSeries windDirectionSeries;
     
+    /*==========================================================================
+        Function: WeatherCollection()
+        Description: 
+            This function is a constructor for the WeatherCollection class, it 
+        instantiates new series for each XML child.
+        Parameters: None
+        Returns: None
+    ==========================================================================*/
     public WeatherCollection()
     {
         temperatureSeries = new TimeSeries("Temperature");
@@ -40,7 +51,20 @@ public class WeatherCollection extends TimeSeriesCollection
         windGustSeries = new TimeSeries("WindGust");
         windDirectionSeries = new TimeSeries("WindDirection");
     }
-    
+  
+    /*==========================================================================
+        Function: updateSeries()
+        Description: 
+            This function is a constructor for the WeatherCollection class, it 
+        instantiates new series for each XML child.
+        Parameters: 
+            ArrayList<WeatherYear> yearsList - An ArrayList containing years.
+            int year - The chosen year
+            int month - The chosen month
+            int day - The chosen day
+            String display = String to display
+        Returns: None
+    ==========================================================================*/  
     public void updateSeries(ArrayList<WeatherYear> yearsList,
             int year, int month, int day, String display)
     {

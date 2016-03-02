@@ -1,15 +1,16 @@
+/******************************************************************************
+ * File: WindDirection.java                                                   *
+ ******************************************************************************/
+
 package weatherstation;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author 1960681
- */
+/*==============================================================================
+    Enumerator: WindDirection
+	
+    Description: 
+        This file defines an enum type for wind direction from 0 - 15 going
+    counter-clockwise from North (N).
+==============================================================================*/
 public enum WindDirection {
 
         N(0),
@@ -30,7 +31,18 @@ public enum WindDirection {
         NNW(15);
         
         public int value;
-        
+
+        /*======================================================================
+            Function: WindDirection()
+    
+            Description: 
+                This function is a constructor for the WindDirection enum, it
+            sets the value for the wind direction based on its parameter. 
+    
+            Parameters: int value - Wind direction value (N, NNE, NE, ENE, E..)
+    
+            Returns: None
+        ======================================================================*/		
         WindDirection(int value) {
             this.value = value;
         }

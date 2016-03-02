@@ -1,16 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/******************************************************************************
+ * File: WeatherData.java                                                     *
+ ******************************************************************************/
 package weatherstation;
 
 import org.jdom2.*;
 
-/**
- *
- * @author 1960681
- */
+/*==============================================================================
+    Class: WeatherData
+	
+    Extends/Implements: None
+	
+    Description: 
+        This class defines a constructor and fields for an element of 
+    weather data.
+==============================================================================*/
 public class WeatherData {
     
     public String date;
@@ -32,6 +35,17 @@ public class WeatherData {
     public int hour;
     public int minute;
     
+	/*==========================================================================
+        Function: WeatherData()
+    
+        Description: 
+            This function is a constructor for the WeatherData class, it 
+        parses XML elements ( namely <weather> ) to get the weather data.
+    
+        Parameters: Element xmlData - The element of XML data to be parsed
+    
+        Returns: None
+    ==========================================================================*/
     WeatherData(Element xmlData)
     {
         Element child = xmlData.getChild("date");

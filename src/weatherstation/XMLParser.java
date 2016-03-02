@@ -1,8 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/******************************************************************************
+ * File: XMLParser.java                                                       *
+ ******************************************************************************/
 package weatherstation;
 
 import java.io.File;
@@ -14,12 +12,29 @@ import java.util.List;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.*;
 
-/**
- *
- * @author 1960681
- */
+/*==============================================================================
+    Class: XMLParser
+	
+    Extends/Implements: None
+	
+    Description: 
+        This class defines an XML parser to retrieve weather data.
+==============================================================================*/
 public class XMLParser {
+
+    /*==========================================================================
+        Function: parse()
     
+        Description: 
+            This function parses the XML file from the chosen directory.
+    
+        Parameters: File directory - Current directory
+                    
+                    ArrayList<WeatherYear> yearsList - List of years we can 
+                    access
+    
+        Returns: None
+    ==========================================================================*/
     public void parse(File directory, ArrayList<WeatherYear> yearsList)
     {      
         SAXBuilder builder = new SAXBuilder();
@@ -43,7 +58,7 @@ public class XMLParser {
                 int yearWindDirectionValue = -1;
                 WeatherYear tempYear = new WeatherYear(yearNum);
                 
-                // counters for pervailing winds 
+                // counters for prevailing winds 
                 // there has to be a better way! 
                 int yearNCounter = 0;
                 int yearNNECounter = 0;
@@ -650,7 +665,17 @@ public class XMLParser {
             System.out.println( e.toString() );
         }
     }
+ 
+    /*==========================================================================
+        Function: processWeeks()
     
+        Description: 
+            This function processes "week" data.
+    
+        Parameters: WeatherYear year - Current year of data we are accessing.
+    
+        Returns: None
+    ==========================================================================*/ 
     public void processWeeks(WeatherYear year) {
         
         WeatherWeek tempWeek = new WeatherWeek(1);

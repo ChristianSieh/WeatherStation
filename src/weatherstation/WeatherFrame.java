@@ -1,8 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/******************************************************************************
+ * File: WeatherFrame.java                                                    *
+ ******************************************************************************/
 package weatherstation;
 
 import static java.awt.Color.white;
@@ -20,10 +18,16 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYDataset;
 
-/**
- *
- * @author 1960681
- */
+/*==============================================================================
+ Class: WeatherFrame
+ 
+ Extends/Implements: JFrame
+ 
+ Description: 
+        Basically the class that is the starting point of the program. This 
+    window appears when the user runs the program. The class itself defines
+    fields, constructor, and methods for the main "frame" of the program.
+==============================================================================*/
 public class WeatherFrame extends javax.swing.JFrame {
 
     private JToggleButton BarometricPressureBtn;
@@ -88,13 +92,30 @@ public class WeatherFrame extends javax.swing.JFrame {
     private JLabel prevailWindDirectionLabel;
     private JLabel totalRainfallLabel;
     
-    /**
-     * Creates new form WeatherFrame
-     */
+    /*=========================================================================
+        Function: WeatherFrame()
+    
+        Description: 
+            This function is the constructor for the WeatherFrame class it 
+        calls initComponents(); 
+        (Auto-generated from NetBeans GUI Designer). 
+    
+        Parameters: None 
+    =========================================================================*/
     public WeatherFrame() {
         initComponents();
     }
     
+	/*=========================================================================
+        Function: initComponents()
+    
+        Description: 
+            This function is called from the WeatherFrame constructor 
+        initializes GUI components.
+        (Auto-generated from NetBeans GUI Designer). 
+    
+        Parameters: None 
+    =========================================================================*/
     private void initComponents() {
         fileChooser = new JFileChooser();
         xmlParser = new XMLParser();
@@ -181,16 +202,19 @@ public class WeatherFrame extends javax.swing.JFrame {
         totalRainfall = new JTextField();
         totalRainfallLabel = new JLabel("    Total Rainfall");
 
-        //fileChooser.setFileFilter(new xmlFilter());
+		//Set the selected mode of the fileChooser to directories only
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
+		//When the application closes it will "EXIT_ON_CLOSE"
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Weather Station");
 
+		/* plotPanel and ButtonPanel added here */
         plotPanel.setBackground(new java.awt.Color(254, 254, 254));
         plotPanel.setPreferredSize(new java.awt.Dimension(10, 0));
         plotPanel.setVerifyInputWhenFocusTarget(false);
 
+		//Temperature button
         TemperatureBtn.setIcon(new ImageIcon(
                 getClass().getResource("/weatherstation/icons/temperature.png")));
         TemperatureBtn.setToolTipText("Temperature");
@@ -203,6 +227,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(TemperatureBtn);
 
+		//Humidity button
         HumidityBtn.setIcon(new javax.swing.ImageIcon(
                 getClass().getResource("/weatherstation/icons/humidity.png")));
         HumidityBtn.setToolTipText("Humidity");
@@ -215,6 +240,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(HumidityBtn);
 
+		//Barometric pressure button
         BarometricPressureBtn.setIcon(new ImageIcon(
                 getClass().getResource("/weatherstation/icons/pressure.png")));
         BarometricPressureBtn.setToolTipText("Barometric Pressure");
@@ -227,6 +253,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(BarometricPressureBtn);
 
+		//Wind speed button
         WindSpeedBtn.setIcon(new ImageIcon(
                 getClass().getResource("/weatherstation/icons/windspeed2.png")));
         WindSpeedBtn.setToolTipText("Wind Speed");
@@ -239,6 +266,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(WindSpeedBtn);
 
+		//Wind chill button
         WindChillBtn.setIcon(new ImageIcon(
                 getClass().getResource("/weatherstation/icons/windchill2.png")));
         WindChillBtn.setToolTipText("Wind Chill");
@@ -251,6 +279,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(WindChillBtn);
 
+		//Heat index button
         HeatIndexBtn.setIcon(new javax.swing.ImageIcon(
                 getClass().getResource("/weatherstation/icons/heatindex.png")));
         HeatIndexBtn.setToolTipText("Heat Index");
@@ -276,6 +305,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(UVIndexBtn);
 
+		//Rainfall button
         RainfallBtn.setIcon(new javax.swing.ImageIcon(
                 getClass().getResource("/weatherstation/icons/rainfall.png")));
         RainfallBtn.setToolTipText("Rainfall");
@@ -288,6 +318,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(RainfallBtn);
 
+		//Submit button
         SubmitBtn.setPreferredSize(new Dimension(100, 25));
         SubmitBtn.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +326,7 @@ public class WeatherFrame extends javax.swing.JFrame {
             }
         });
         
+		/* Gauges */
         TempGuagelabel.setText("Down here have all the guages");
 
         GridLayout gridLayout = new GridLayout(0,4);
@@ -336,9 +368,11 @@ public class WeatherFrame extends javax.swing.JFrame {
         
         DisplayLabel.setText("Display");
 
+		//Combo boxes
         displayComboBox.setModel(new DefaultComboBoxModel(new String[]
         {"Year", "Month", "Week", "Day"}));
 
+		//Year combo box
         yearComboBox.setModel(new DefaultComboBoxModel<>());
         yearComboBox.addItemListener(new ItemListener(){
             @Override
@@ -352,6 +386,7 @@ public class WeatherFrame extends javax.swing.JFrame {
             }
         });
         
+		//Month combo box
         monthComboBox.setModel(new DefaultComboBoxModel());
         monthComboBox.addItemListener(new ItemListener(){
         @Override
@@ -362,27 +397,35 @@ public class WeatherFrame extends javax.swing.JFrame {
             }
         });
 
+		//Day combo box
         dayComboBox.setModel(new javax.swing.DefaultComboBoxModel());
         
+		//FileMenu 
         FileMenu.setText("File");
         FileMenu.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FileMenuActionPerformed(evt);
+                //FileMenuActionPerformed(evt);
             }
         });
 
+		//Open menu item under File menu
         OpenMenuItem.setText("Open");
         OpenMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OpenMenuItemActionPerformed(evt);
             }
         });
+		
+		//Add the Open menu item
         FileMenu.add(OpenMenuItem);
 
-        MenuBar.add(FileMenu);
+		//Add the FileMenu menu bar
+        MenuBar.add(FileMenu); 
 
+		//Set the menu bar
         setJMenuBar(MenuBar);
         
+		/* Code generated by NetBeans GUI designer */
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -458,7 +501,17 @@ public class WeatherFrame extends javax.swing.JFrame {
         pack();
     }
     
-
+    /*==========================================================================
+        Function: OpenMenuItemActionPerformed()
+    
+        Description: 
+            This function fills the year, month, and day combo box after 
+        the user chooses a file
+    
+        Parameters: ActionEvent evt - event performed
+    
+        Returns: None
+    ==========================================================================*/
     private void OpenMenuItemActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -475,6 +528,17 @@ public class WeatherFrame extends javax.swing.JFrame {
         }
     }
 
+    /*==========================================================================
+        Function: TemperatureBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with temperature when the user
+        clicks the temperature button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/
     private void TemperatureBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -484,6 +548,17 @@ public class WeatherFrame extends javax.swing.JFrame {
             renderer.setSeriesVisible(0, false);
     }
     
+    /*==========================================================================
+        Function: HumidityBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with humidity data when the user
+        clicks the humidity button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/	
     private void HumidityBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -493,6 +568,17 @@ public class WeatherFrame extends javax.swing.JFrame {
             renderer.setSeriesVisible(1, false);
     }
     
+    /*==========================================================================
+        Function: BarometricPressureBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with barometric pressure data when 
+        the user clicks the barometric pressure button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/	
     private void BarometricPressureBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -502,6 +588,17 @@ public class WeatherFrame extends javax.swing.JFrame {
             renderer.setSeriesVisible(2, false);
     }
     
+    /*==========================================================================
+        Function: WindSpeedBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with windspeed data when 
+        the user clicks the windspeed button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/	
     private void WindSpeedBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -511,6 +608,17 @@ public class WeatherFrame extends javax.swing.JFrame {
             renderer.setSeriesVisible(3, false);
     }
     
+    /*==========================================================================
+        Function: WindChillBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with windchill data when 
+        the user clicks the windchill button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/
     private void WindChillBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -520,6 +628,17 @@ public class WeatherFrame extends javax.swing.JFrame {
             renderer.setSeriesVisible(4, false);
     }
 
+    /*==========================================================================
+        Function: HeatIndexBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with heat index data when 
+        the user clicks the heat index button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/
     private void HeatIndexBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -529,6 +648,17 @@ public class WeatherFrame extends javax.swing.JFrame {
             renderer.setSeriesVisible(5, false);
     }
     
+    /*==========================================================================
+        Function: UVIndexBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with uvindex data when 
+        the user clicks the uvindex button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/	
     private void UVIndexBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -538,6 +668,17 @@ public class WeatherFrame extends javax.swing.JFrame {
             renderer.setSeriesVisible(6, false);
     }
     
+	/*==========================================================================
+        Function: RainfallBtnActionPerformed()
+    
+        Description: 
+            This function populates the graph with rainfall data when 
+        the user clicks the rainfall button.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/
     private void RainfallBtnActionPerformed(java.awt.event.ItemEvent evt) {
         if(evt.getStateChange() ==  ItemEvent.SELECTED)
         {
@@ -546,11 +687,18 @@ public class WeatherFrame extends javax.swing.JFrame {
         else if(evt.getStateChange() == ItemEvent.DESELECTED)
             renderer.setSeriesVisible(7, false);
     }
-
-    private void FileMenuActionPerformed(java.awt.event.ActionEvent evt) {
-
-    }
+ 
+    /*==========================================================================
+        Function: SubmitBtnActionPerformed()
     
+        Description: 
+            This function handles the actions that take place when the 
+		submit button is pressed.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/ 
     private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {
         TemperatureBtn.setSelected(false);
         HumidityBtn.setSelected(false);
@@ -567,7 +715,18 @@ public class WeatherFrame extends javax.swing.JFrame {
         updateDataset();
         getData();
     }
+  
+    /*==========================================================================
+        Function: getData()
     
+        Description: 
+            This function populates the mean and average data temperature max, 
+        min, etc.
+    
+        Parameters: None
+    
+        Returns: None
+    ==========================================================================*/  
     private void getData() {
         
         if ("Year".equals(displayComboBox.getSelectedItem().toString())) {
@@ -772,18 +931,37 @@ public class WeatherFrame extends javax.swing.JFrame {
         windSpeedDate.setEditable(false);
         windSpeedTime.setEditable(false);
         prevailWindDirection.setEditable(false);
-        totalRainfall.setEditable(false);
-        
-        
-        
+        totalRainfall.setEditable(false);   
     }
     
+	/*==========================================================================
+        Function: updateDataset()
+    
+        Description: 
+            This function updates the dataset with the collection of data we 
+        currently have access to.
+    
+        Parameters: None
+    
+        Returns: None
+    ==========================================================================*/
     private void updateDataset()
     {
         dataset = collection;
         updateChart();
     }
     
+    /*==========================================================================
+        Function: updateChart()
+    
+        Description: 
+            This function updates the chart based on the dataset or
+        collection we have access to.
+    
+        Parameters: None
+    
+        Returns: None
+    ==========================================================================*/
     private void updateChart()
     {    
         plot.setDataset(dataset);
@@ -804,6 +982,16 @@ public class WeatherFrame extends javax.swing.JFrame {
         plotPanel.repaint();
     }
 
+    /*==========================================================================
+        Function: createChart()
+    
+        Description: 
+            This function creates a chart (From JFreeChart.org)
+    
+        Parameters: None
+    
+        Returns: None
+    ==========================================================================*/
     private JFreeChart createChart()
     {
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
@@ -814,6 +1002,17 @@ public class WeatherFrame extends javax.swing.JFrame {
         return chart;
     }
 
+    /*==========================================================================
+        Function: fillYearComboBox()
+    
+        Description: 
+            This function populates the year combo box with the year data
+        we obtained from the chosen directory.
+    
+        Parameters: ActionEvent evt - event performed.
+    
+        Returns: None
+    ==========================================================================*/
     private void fillYearComboBox() {
         
         for (int i = 0; i < yearsList.size(); i++)
@@ -822,6 +1021,17 @@ public class WeatherFrame extends javax.swing.JFrame {
         }
     }
     
+    /*==========================================================================
+        Function: fillMonthComboBox()
+    
+        Description: 
+            This function populates the month combo box with the month data
+        we obtained from the chosen directory.
+    
+        Parameters: None
+    
+        Returns: None
+    ==========================================================================*/
     private void fillMonthComboBox() {
         
         for (int i = 0; i < monthList.size(); i++)
@@ -829,7 +1039,18 @@ public class WeatherFrame extends javax.swing.JFrame {
             monthComboBox.addItem(monthList.get(i));
         }
     }
+ 
+    /*==========================================================================
+        Function: fillDayComboBox()
     
+        Description: 
+            This function populates the day combo box with the day data
+        we obtained from the chosen directory.
+    
+        Parameters: None
+    
+        Returns: None
+    ==========================================================================*/   
     private void fillDayComboBox(WeatherMonth month) {  
         for(int i = 0; i < month.days.size(); i++)
         {
