@@ -66,6 +66,7 @@ public class WeatherData {
             hour = Integer.parseInt(temp[0]);
             String meridiem = temp[1].substring(temp[1].length() - 1);
             minute = Integer.parseInt(temp[1].substring(0, temp[1].length() - 1));
+            //Bases on AM or PM update the 12 hour to the correct time
             if(meridiem.equalsIgnoreCase("P") && hour != 12)
                 hour += 12;
             if(meridiem.equalsIgnoreCase("A") && hour == 12)
