@@ -64,7 +64,7 @@ public class WeatherCollection extends TimeSeriesCollection
                 for(int j = 0; j < yearsList.get(year).days.get(i).data.size(); j++)
                 {
                     WeatherData tempData = tempDay.data.get(j);
-                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
+                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
                     temperatureSeries.add(minuteType, tempData.temperature);
                     humiditySeries.add(minuteType, tempData.humidity);
                     barometricSeries.add(minuteType, tempData.barometer);
@@ -89,11 +89,7 @@ public class WeatherCollection extends TimeSeriesCollection
                 for(int j = 0; j < tempDay.data.size(); j++)
                 {
                     WeatherData tempData = tempDay.data.get(j);
-                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
-                    if(tempData.temperature > 50)
-                    {
-                      int test = 0;  
-                    }
+                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
                     temperatureSeries.add(minuteType, tempData.temperature);
                     humiditySeries.add(minuteType, tempData.humidity);
                     barometricSeries.add(minuteType, tempData.barometer);
@@ -123,7 +119,7 @@ public class WeatherCollection extends TimeSeriesCollection
                 for(int j = 0; j < tempDay.data.size(); j++)
                 {
                     WeatherData tempData = tempDay.data.get(j);
-                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
+                    Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
                     temperatureSeries.add(minuteType, tempData.temperature);
                     humiditySeries.add(minuteType, tempData.humidity);
                     barometricSeries.add(minuteType, tempData.barometer);
@@ -145,7 +141,7 @@ public class WeatherCollection extends TimeSeriesCollection
             for(int i = 0; i < tempDay.data.size(); i++)
             {
                 WeatherData tempData = tempDay.data.get(i);
-                Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day + 1, tempData.month + 1, tempData.year);
+                Minute minuteType = new Minute(tempData.minute, tempData.hour, tempData.day, tempData.month + 1, tempData.year);
                 temperatureSeries.add(minuteType, tempData.temperature);
                 humiditySeries.add(minuteType, tempData.humidity);
                 barometricSeries.add(minuteType, tempData.barometer);

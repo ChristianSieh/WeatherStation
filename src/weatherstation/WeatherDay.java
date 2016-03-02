@@ -15,6 +15,7 @@ public class WeatherDay {
     
     public int month;
     public int week;
+    public int day;
     public double meanTemp = 0;
     public double highTemp = -10000000;
     public double lowTemp = 100000000;
@@ -31,7 +32,7 @@ public class WeatherDay {
     public double totalRainfall = 0;
     ArrayList<WeatherData> data;
     
-    WeatherDay(int month)
+    WeatherDay()
     {
         data = new ArrayList<WeatherData>();
     }

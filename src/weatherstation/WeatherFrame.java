@@ -327,24 +327,6 @@ public class WeatherFrame extends javax.swing.JFrame {
         GuagesPanel.add(prevailWindDirection);
         GuagesPanel.add(totalRainfallLabel);
         GuagesPanel.add(totalRainfall);
-        
-       /* javax.swing.GroupLayout GuagesPanelLayout = new GroupLayout(GuagesPanel);
-        GuagesPanel.setLayout(GuagesPanelLayout);
-        GuagesPanelLayout.setHorizontalGroup(
-            GuagesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GuagesPanelLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(TempGuagelabel)
-                .addContainerGap(631, Short.MAX_VALUE))
-        );
-        GuagesPanelLayout.setVerticalGroup(
-            GuagesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GuagesPanelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(TempGuagelabel, GroupLayout.PREFERRED_SIZE, 
-                        27, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
-        );*/
 
         YearLabel.setText("Year");
 
@@ -851,7 +833,7 @@ public class WeatherFrame extends javax.swing.JFrame {
     private void fillDayComboBox(WeatherMonth month) {  
         for(int i = 0; i < month.days.size(); i++)
         {
-            dayComboBox.addItem(i + 1);
+            dayComboBox.addItem(month.days.get(i).day);
         }
     }
 }
