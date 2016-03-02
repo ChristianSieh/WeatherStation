@@ -29,7 +29,8 @@ import org.jfree.data.xy.XYDataset;
     fields, constructor, and methods for the main "frame" of the program.
 ==============================================================================*/
 public class WeatherFrame extends javax.swing.JFrame {
-
+    
+    // GUI components
     private JToggleButton BarometricPressureBtn;
     private JPanel ButtonPanel;
     private JMenu FileMenu;
@@ -117,6 +118,8 @@ public class WeatherFrame extends javax.swing.JFrame {
         Parameters: None 
     =========================================================================*/
     private void initComponents() {
+        
+        // init Component values
         fileChooser = new JFileChooser();
         xmlParser = new XMLParser();
         dayComboBox = new JComboBox<Integer>();
@@ -292,7 +295,7 @@ public class WeatherFrame extends javax.swing.JFrame {
         });
         ButtonPanel.add(HeatIndexBtn);
 
-        
+        // state changed 
         UVIndexBtn.setIcon(new ImageIcon(
                 getClass().getResource("/weatherstation/icons/uvindex.png")));
         UVIndexBtn.setToolTipText("UV Index");
@@ -326,7 +329,7 @@ public class WeatherFrame extends javax.swing.JFrame {
             }
         });
         
-		/* Gauges */
+		/* Add text fields for stats */
         TempGuagelabel.setText("Down here have all the guages");
 
         GridLayout gridLayout = new GridLayout(0,4);
@@ -720,8 +723,8 @@ public class WeatherFrame extends javax.swing.JFrame {
         Function: getData()
     
         Description: 
-            This function populates the mean and average data temperature max, 
-        min, etc.
+            This function populates the stats for the selected time frame in the, 
+       GUI. Average temp, min, date, wind gust, etc.
     
         Parameters: None
     

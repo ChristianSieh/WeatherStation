@@ -40,6 +40,7 @@ public class XMLParser {
         SAXBuilder builder = new SAXBuilder();
         try
         {
+            //try to parse the directory file list
             int fileIndex = 0;
             File[] files = directory.listFiles();
             Arrays.sort(files);
@@ -82,6 +83,7 @@ public class XMLParser {
                 int monthWindDirectionValue = -1;
                 for(int monthIndex = 0; monthIndex < 12; monthIndex++)
                 {
+                    // check for lat index
                     if(yearNum == 2015 && monthIndex == 11)
                     {
                         int test = 0;
@@ -135,10 +137,13 @@ public class XMLParser {
                         boolean dayFlag = true;
                         String[] tempDate;
 
+                        //flag for if the data changes to stop reading in data for the day
                         while ( dayFlag == true) // probably 95
                         {
                             try 
                             {
+                                // Try to get data for the day and catch it 
+                                // if it fails and move on
                                 Element weather = weatherList.get(XMLDayCounter);
                                 Element nextWeather = weatherList.get(XMLDayCounter+1);
                                 WeatherData data = new WeatherData(weather);
@@ -164,8 +169,11 @@ public class XMLParser {
                             }
                         }
 
+                        // a large set of loops for finding the correct wind direction
                         for (int k = 0; k < tempDay.data.size(); k++) {
 
+                            // if a wind direction string matchs the wind direction
+                            // add to counter for tooltip display later
                             if("N".equals(tempDay.data.get(k).windDirection)) {
                                 dayNCounter += 1;
                                 if (dayNCounter > dayHighest) {
@@ -295,7 +303,8 @@ public class XMLParser {
                                 }
                             }
 
-
+                            // do the various calculations required to process
+                            // the data for the boxs at the bottom of the Gui
                             tempDay.meanTemp = tempDay.meanTemp + tempDay.data.get(k).temperature;
                             tempDay.meanWindSpeed = tempDay.meanWindSpeed + tempDay.data.get(k).windSpeed;
                             tempDay.totalRainfall = tempDay.totalRainfall + tempDay.data.get(k).rainfall;
@@ -351,6 +360,10 @@ public class XMLParser {
                             }
 
                         }
+                        
+                        // repeat for month and year
+                        // this is very ineffective big O and code look wise
+                        
 
                         tempDay.windDirection = dayString;
                         tempDay.windDirectionValue = dayWindDirectionValue;
